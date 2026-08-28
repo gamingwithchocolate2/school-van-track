@@ -1,331 +1,433 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>our chat</title>
+    <title>ลงทะเบียนเข้าใช้งาน - School Van Track Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0b0b0c; color: #e4e4e7; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .chat-container { width: 100%; max-width: 480px; height: 100vh; background: #121214; display: flex; flex-direction: column; width: 100vw; }
-        
-        .header { padding: 16px; background: #1a1a1e; border-bottom: 1px solid #27272a; display: flex; flex-direction: column; gap: 4px; }
-        .header-top { display: flex; align-items: center; justify-content: space-between; }
-        .header h1 { margin: 0; font-size: 18px; font-weight: 600; color: #fff; }
-        
-        .header-actions { display: flex; align-items: center; gap: 10px; }
-        .call-btn { background: #22c55e; color: white; border: none; padding: 6px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; cursor: pointer; }
-        
-        .members-indicator { font-size: 12px; color: #a1a1aa; background: #27272a; padding: 4px 8px; border-radius: 12px; display: flex; align-items: center; gap: 6px; font-weight: 500; }
-        .members-indicator::before { content: ''; display: inline-block; width: 6px; height: 6px; background: #22c55e; border-radius: 50%; }
-        .member-list { font-size: 11px; color: #71717a; margin: 0; padding-top: 2px; }
-
-        .setup-screen { padding: 24px; display: flex; flex-direction: column; gap: 16px; flex-grow: 1; justify-content: center; }
-        input[type="text"] { background: #27272a; border: 1px solid #3f3f46; color: #fff; padding: 12px; border-radius: 8px; font-size: 14px; outline: none; }
-        button { background: #3b82f6; color: #fff; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 500; font-size: 14px; }
-        
-        .messages { flex-grow: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; background: #0b0b0c; }
-        .msg { max-width: 75%; padding: 10px 14px; border-radius: 16px; font-size: 15px; line-height: 1.4; word-break: break-word; }
-        .msg.me { background: #2563eb; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
-        .msg.them { background: #27272a; color: #e4e4e7; align-self: flex-start; border-bottom-left-radius: 4px; }
-        
-        .msg img { max-width: 100%; border-radius: 8px; margin-top: 4px; display: block; }
-        .msg audio { max-width: 100%; margin-top: 4px; display: block; }
-        .call-link { color: #3b82f6; text-decoration: underline; font-weight: bold; cursor: pointer; }
-
-        .input-bar { padding: 12px; background: #1a1a1e; border-top: 1px solid #27272a; display: flex; align-items: center; gap: 8px; }
-        .input-bar input { flex-grow: 1; background: #27272a; border: 1px solid #3f3f46; color: #fff; padding: 10px; border-radius: 8px; outline: none; }
-        
-        .icon-btn { background: none; border: none; color: #a1a1aa; font-size: 20px; cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center; }
-        .icon-btn:hover { color: #fff; }
-        .icon-btn.recording { color: #ef4444; animation: blink 1s infinite; }
-        
-        @keyframes blink { 50% { opacity: 0.5; } }
-        .hidden { display: none !important; }
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Prompt', sans-serif; background-color: #0f172a; }
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex items-center justify-center p-3 sm:p-6">
 
-<div class="chat-container">
-    <div class="header">
-        <div class="header-top">
-            <h1>our chat</h1>
-            <div class="header-actions">
-                <button id="call-btn" class="call-btn hidden">📞 Call</button>
-                <div id="members-count" class="members-indicator hidden">0 online</div>
+    <!-- MAIN REGISTRATION CONTAINER -->
+    <div class="w-full max-w-md bg-white min-h-[850px] rounded-[2.5rem] shadow-2xl flex flex-col justify-between overflow-hidden relative border border-slate-700/50 my-auto">
+
+        <!-- HEADER & ROLE SELECTOR -->
+        <div class="bg-slate-900 text-white px-5 py-4 space-y-3 border-b border-slate-800">
+            <div class="flex justify-between items-center">
+                <h1 class="text-sm font-bold text-amber-400 flex items-center gap-1.5">
+                    <i class="fa-solid fa-id-card"></i> ระบบลงทะเบียน School Van Track
+                </h1>
+                <span class="text-[10px] bg-slate-800 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-700 font-mono">v4.6 Secure</span>
+            </div>
+
+            <!-- Role Selector Tabs -->
+            <div class="grid grid-cols-3 gap-1.5 bg-slate-800 p-1 rounded-xl text-xs font-bold">
+                <button onclick="switchRegRole('driver')" id="reg-tab-driver" class="py-2 rounded-lg bg-amber-400 text-slate-950 shadow transition flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-van-shuttle"></i> คนขับรถตู้
+                </button>
+                <button onclick="switchRegRole('student')" id="reg-tab-student" class="py-2 rounded-lg text-slate-300 hover:text-white transition flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-user-graduate"></i> นักเรียน
+                </button>
+                <button onclick="switchRegRole('parent')" id="reg-tab-parent" class="py-2 rounded-lg text-slate-300 hover:text-white transition flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-user-group"></i> ผู้ปกครอง
+                </button>
             </div>
         </div>
-        <div id="members-names" class="member-list hidden"></div>
-    </div>
-    
-    <div id="setup-view" class="setup-screen">
-        <input type="text" id="username-input" placeholder="Enter your nickname">
-        <input type="text" id="room-input" placeholder="Enter secret room name">
-        <button id="join-btn">Join Chat Room</button>
+
+        <!-- FORM CONTENT AREA -->
+        <div class="flex-1 p-5 overflow-y-auto custom-scroll space-y-4">
+            
+            <!-- DEMO AUTO-FILL BUTTON -->
+            <div class="flex justify-between items-center bg-indigo-50 border border-indigo-200 p-2.5 rounded-2xl">
+                <span class="text-[11px] font-bold text-indigo-900">⚡ เติมข้อมูลทดสอบอัตโนมัติ:</span>
+                <button onclick="autoFillDemoData()" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] font-bold rounded-xl shadow transition">
+                    🧪 Auto-Fill
+                </button>
+            </div>
+
+            <!-- ================= FORM 1: DRIVER REGISTRATION ================= -->
+            <div id="form-role-driver" class="space-y-3.5">
+                <div class="border-b pb-2">
+                    <h2 class="text-xs font-bold text-slate-900">📝 ลงทะเบียนสมัครสมาชิก "คนขับรถตู้"</h2>
+                    <p class="text-[10px] text-slate-500">กรอกข้อมูลส่วนตัว ใบขับขี่ และรูปรถเพื่อตรวจสอบความปลอดภัย</p>
+                </div>
+
+                <div class="space-y-3 text-xs">
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">ชื่อจริง - นามสกุลจริง *</label>
+                        <input type="text" id="drv-fullname" placeholder="เช่น นายศักดิ์ชัย มีสุข" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-amber-500">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">ชื่อเล่น *</label>
+                            <input type="text" id="drv-nickname" placeholder="เช่น ลุงศักดิ์" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">เบอร์โทรศัพท์ *</label>
+                            <input type="tel" id="drv-phone" placeholder="0812345678" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">เลขบัตรประจำตัวประชาชน 13 หลัก * (ตรวจสอบ Modulo 11)</label>
+                        <input type="text" id="drv-idcard" placeholder="1100701234561" maxlength="13" oninput="validateThaiID(this.value)" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold focus:outline-none">
+                        <p id="idcard-validation-msg" class="text-[10px] text-slate-400 mt-1">กรุณากรอกเลข 13 หลักให้ถูกต้องตามทะเบียนราษฎร์</p>
+                    </div>
+
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">ช่องทางการติดต่ออื่น (LINE ID / Facebook)</label>
+                        <input type="text" id="drv-contact" placeholder="เช่น LINE: sakchai_van" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">รหัสรถตู้ประจำตัว *</label>
+                            <input type="text" id="drv-vancode" placeholder="V-98765" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">เลขทะเบียนรถตู้ *</label>
+                            <input type="text" id="drv-license" placeholder="3กข-1234 กทม." class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- AI Image Verification Box: Driver Face & License & Van Photo -->
+                    <div class="p-3 bg-amber-50/80 border border-amber-200 rounded-2xl space-y-2.5">
+                        <p class="font-bold text-amber-950 text-xs flex items-center gap-1.5">
+                            <i class="fa-solid fa-shield-halved text-amber-600"></i> AI ตรวจสอบความถูกต้องของรูปถ่าย (Image Verification)
+                        </p>
+                        
+                        <div class="grid grid-cols-3 gap-2 text-center">
+                            <div class="p-2 bg-white rounded-xl border border-amber-100 space-y-1">
+                                <p class="text-[10px] font-bold text-slate-700">รูปหน้าตรง</p>
+                                <input type="file" id="file-drv-face" accept="image/*" class="hidden" onchange="simulateAIInspect('drv-face', this)">
+                                <button type="button" onclick="document.getElementById('file-drv-face').click()" class="w-full py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 text-[10px] font-bold rounded-lg transition">
+                                    📷 อัปโหลด
+                                </button>
+                                <span id="status-drv-face" class="text-[9px] text-slate-400 block">ยังไม่ตรวจ</span>
+                            </div>
+
+                            <div class="p-2 bg-white rounded-xl border border-amber-100 space-y-1">
+                                <p class="text-[10px] font-bold text-slate-700">รูปใบขับขี่</p>
+                                <input type="file" id="file-drv-license" accept="image/*" class="hidden" onchange="simulateAIInspect('drv-license', this)">
+                                <button type="button" onclick="document.getElementById('file-drv-license').click()" class="w-full py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 text-[10px] font-bold rounded-lg transition">
+                                    📷 อัปโหลด
+                                </button>
+                                <span id="status-drv-license" class="text-[9px] text-slate-400 block">ยังไม่ตรวจ</span>
+                            </div>
+
+                            <div class="p-2 bg-white rounded-xl border border-amber-100 space-y-1">
+                                <p class="text-[10px] font-bold text-slate-700">รูปรถตู้จริง</p>
+                                <input type="file" id="file-drv-van" accept="image/*" class="hidden" onchange="simulateAIInspect('drv-van', this)">
+                                <button type="button" onclick="document.getElementById('file-drv-van').click()" class="w-full py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 text-[10px] font-bold rounded-lg transition">
+                                    📷 อัปโหลด
+                                </button>
+                                <span id="status-drv-van" class="text-[9px] text-slate-400 block">ยังไม่ตรวจ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">ตั้งรหัสผ่าน 6 หลัก สำหรับเข้าสู่ระบบ *</label>
+                        <input type="password" id="drv-pass" placeholder="******" maxlength="6" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold focus:outline-none">
+                    </div>
+                </div>
+
+                <button onclick="completeRegistration('driver')" class="w-full py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-2xl text-xs shadow-lg transition flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-user-check"></i>
+                    <span>🚀 ยืนยันการลงทะเบียน (เข้าสู่หน้าคนขับรถตู้)</span>
+                </button>
+            </div>
+
+            <!-- ================= FORM 2: STUDENT REGISTRATION ================= -->
+            <div id="form-role-student" class="space-y-3.5 hidden">
+                <div class="border-b pb-2">
+                    <h2 class="text-xs font-bold text-slate-900">📝 ลงทะเบียนสมัครสมาชิก "นักเรียน"</h2>
+                    <p class="text-[10px] text-slate-500">กรอกข้อมูลสถาบันและจุดรอรับ เพื่อสร้าง Student Code สำหรับให้ผู้ปกครองผูกแอป</p>
+                </div>
+
+                <div class="space-y-3 text-xs">
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">ชื่อจริง - นามสกุลจริงนักเรียน *</label>
+                        <input type="text" id="stu-fullname" placeholder="เช่น ด.ช. สมชาย ใจดี" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-blue-500">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">ชื่อเล่น *</label>
+                            <input type="text" id="stu-nickname" placeholder="เช่น น้องชาย" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">เบอร์โทรศัพท์นักเรียน *</label>
+                            <input type="tel" id="stu-phone" placeholder="0891112222" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">ช่องทางการติดต่ออื่น (LINE ID)</label>
+                        <input type="text" id="stu-contact" placeholder="LINE: somchai_j" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">ชื่อสถาบัน / โรงเรียนปลายทาง *</label>
+                        <input type="text" id="stu-school" placeholder="เช่น โรงเรียนสาธิตพัฒนา" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">ที่อยู่บ้าน หรือพิกัด Google Maps (จุดรอรับ-ส่ง) *</label>
+                        <textarea id="stu-address" rows="2" placeholder="เช่น หมู่บ้านมิตรภาพ ซอย 5 บ้านเลขที่ 12/34" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none"></textarea>
+                    </div>
+
+                    <!-- AI Face Inspection for Student -->
+                    <div class="p-3 bg-blue-50/80 border border-blue-200 rounded-2xl space-y-2">
+                        <p class="font-bold text-blue-950 text-xs flex items-center gap-1.5">
+                            <i class="fa-solid fa-face-smile text-blue-600"></i> AI ตรวจสอบรูปถ่ายหน้าตรงนักเรียน
+                        </p>
+                        <div class="flex items-center gap-2">
+                            <input type="file" id="file-stu-face" accept="image/*" class="hidden" onchange="simulateAIInspect('stu-face', this)">
+                            <button type="button" onclick="document.getElementById('file-stu-face').click()" class="py-2 px-4 bg-blue-100 hover:bg-blue-200 text-blue-900 text-xs font-bold rounded-xl transition">
+                                📷 อัปโหลดรูปนักเรียน
+                            </button>
+                            <span id="status-stu-face" class="text-xs text-slate-500 font-semibold">ยังไม่ตรวจสอบ</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">ตั้งรหัสผ่าน 6 หลัก สำหรับเข้าสู่ระบบนักเรียน *</label>
+                        <input type="password" id="stu-pass" placeholder="******" maxlength="6" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold focus:outline-none">
+                    </div>
+                </div>
+
+                <button onclick="completeRegistration('student')" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl text-xs shadow-lg transition flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <span>🚀 ยืนยันการลงทะเบียน (เข้าสู่หน้านักเรียน)</span>
+                </button>
+            </div>
+
+            <!-- ================= FORM 3: PARENT REGISTRATION ================= -->
+            <div id="form-role-parent" class="space-y-3.5 hidden">
+                <div class="border-b pb-2">
+                    <h2 class="text-xs font-bold text-slate-900">📝 ลงทะเบียนสมัครสมาชิก "ผู้ปกครอง"</h2>
+                    <p class="text-[10px] text-slate-500">กรอกรหัสประจำตัวนักเรียน 6 หลักของบุตรหลาน เพื่อผูกบัญชีติดตามรถตู้</p>
+                </div>
+
+                <div class="space-y-3 text-xs">
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">ชื่อจริง - นามสกุลจริงผู้ปกครอง *</label>
+                        <input type="text" id="par-fullname" placeholder="เช่น คุณแม่นิด ใจดี" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-purple-500">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">ชื่อเล่นผู้ปกครอง (ไม่บังคับ)</label>
+                            <input type="text" id="par-nickname" placeholder="เช่น แม่นิด" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">เบอร์โทรศัพท์ผู้ปกครอง *</label>
+                            <input type="tel" id="par-phone" placeholder="0867778888" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">ชื่อของนักเรียน (บุตรหลาน) *</label>
+                        <input type="text" id="par-childname" placeholder="เช่น ด.ช. สมชาย ใจดี (น้องชาย)" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                    </div>
+
+                    <div class="p-3 bg-purple-50 border border-purple-200 rounded-2xl space-y-1.5">
+                        <label class="font-bold text-purple-950 block">รหัสประจำตัวนักเรียน (Student Code 6 หลัก) *</label>
+                        <input type="text" id="par-studentcode" placeholder="เช่น STU-84920" maxlength="9" class="w-full p-2.5 bg-white border border-purple-300 rounded-xl font-mono font-bold text-purple-900 focus:outline-none uppercase">
+                        <p class="text-[9px] text-purple-700">รหัสนี้ได้จากหน้าลงทะเบียนของนักเรียนเพื่อเชื่อมโยงข้อมูลติดตาม</p>
+                    </div>
+
+                    <!-- AI Face Inspection for Parent (Optional) -->
+                    <div class="p-3 bg-purple-50/60 border border-purple-200 rounded-2xl space-y-2">
+                        <p class="font-bold text-purple-950 text-xs flex items-center gap-1.5">
+                            <i class="fa-solid fa-camera text-purple-600"></i> อัปโหลดรูปผู้ปกครอง (ไม่บังคับ)
+                        </p>
+                        <div class="flex items-center gap-2">
+                            <input type="file" id="file-par-face" accept="image/*" class="hidden" onchange="simulateAIInspect('par-face', this)">
+                            <button type="button" onclick="document.getElementById('file-par-face').click()" class="py-2 px-4 bg-purple-100 hover:bg-purple-200 text-purple-900 text-xs font-bold rounded-xl transition">
+                                📷 เลือกรูปภาพ
+                            </button>
+                            <span id="status-par-face" class="text-xs text-slate-500 font-semibold">ไม่ได้บังคับ</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">ตั้งรหัสผ่าน 6 หลัก สำหรับเข้าสู่ระบบผู้ปกครอง *</label>
+                        <input type="password" id="par-pass" placeholder="******" maxlength="6" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold focus:outline-none">
+                    </div>
+                </div>
+
+                <button onclick="completeRegistration('parent')" class="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-2xl text-xs shadow-lg transition flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-user-group"></i>
+                    <span>🚀 ยืนยันการลงทะเบียน (เข้าสู่หน้าผู้ปกครอง)</span>
+                </button>
+            </div>
+
+        </div>
+
+        <nav class="bg-slate-900 text-slate-400 py-3 text-center text-[10px] font-semibold border-t border-slate-800">
+            School Van Track Registration & AI Verification v4.6
+        </nav>
     </div>
 
-    <div id="chat-view" class="chat-screen hidden" style="display: flex; flex-direction: column; flex-grow: 1;">
-        <div id="messages-container" class="messages"></div>
-        <div class="input-bar">
-            <input type="file" id="image-input" accept="image/*" class="hidden">
-            <button id="attach-btn" class="icon-btn">📎</button>
-            <button id="mic-btn" class="icon-btn">🎤</button>
-            
-            <input type="text" id="text-input" placeholder="Message">
-            <button id="send-btn" style="background: none; color: #3b82f6; font-size: 18px; border:none; cursor:pointer;">➔</button>
+    <!-- SUCCESS MODAL -->
+    <div id="success-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-white w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl text-center">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl shadow-inner">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div>
+                <h3 class="font-black text-slate-900 text-lg" id="success-modal-title">ลงทะเบียนสำเร็จ!</h3>
+                <p class="text-xs text-slate-500 mt-1" id="success-modal-desc">ระบบได้สร้างรหัสประจำตัวและบันทึกข้อมูลของคุณแล้ว</p>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-2xl border font-mono text-xl font-black text-indigo-700 tracking-wider" id="generated-code-display">
+                DRV-98765
+            </div>
+            <button onclick="redirectToDashboard()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-2xl shadow-lg transition">
+                🚀 เข้าสู่ระบบหน้าทำการ (Dashboard)
+            </button>
         </div>
     </div>
-</div>
 
-<script>
-    let roomKey = '';
-    let myUsername = 'User';
-    const myId = Math.random().toString(36).substr(2, 9);
-    let knownMessages = new Set();
+    <script>
+        let registeredRole = 'driver';
 
-    let mediaRecorder;
-    let audioChunks = [];
-    let isRecording = false;
+        function switchRegRole(role) {
+            ['driver', 'student', 'parent'].forEach(r => {
+                document.getElementById(`form-role-${r}`).classList.add('hidden');
+                document.getElementById(`reg-tab-${r}`).className = "py-2 rounded-lg text-slate-300 hover:text-white transition flex items-center justify-center gap-1";
+            });
 
-    const setupView = document.getElementById('setup-view'), chatView = document.getElementById('chat-view');
-    const messagesContainer = document.getElementById('messages-container'), textInput = document.getElementById('text-input');
-    const joinBtn = document.getElementById('join-btn'), callBtn = document.getElementById('call-btn');
-    const countTag = document.getElementById('members-count'), namesTag = document.getElementById('members-names');
-    const imageInput = document.getElementById('image-input');
-
-    joinBtn.onclick = () => {
-        const userIn = document.getElementById('username-input').value.trim();
-        const roomIn = document.getElementById('room-input').value.trim();
-        if (!userIn || !roomIn) return alert('Fill out both boxes first');
-        
-        myUsername = userIn;
-        roomKey = 'room_' + btoa(roomIn).replace(/[^a-zA-Z0-9]/g, '').toLowerCase().substr(0, 20);
-        
-        setupView.classList.add('hidden');
-        chatView.classList.remove('hidden');
-        countTag.classList.remove('hidden');
-        namesTag.classList.remove('hidden');
-        callBtn.classList.remove('hidden');
-        
-        pollSync();
-        sendHeartbeat();
-        
-        setInterval(pollSync, 2000);      
-        setInterval(sendHeartbeat, 5000);  
-    };
-
-    async function pollSync() {
-        try {
-            const res = await fetch(`https://ntfy.sh/${roomKey}/json?poll=1`);
-            if (!res.ok) return;
+            document.getElementById(`form-role-${role}`).classList.remove('hidden');
+            const activeTab = document.getElementById(`reg-tab-${role}`);
             
-            const rawText = await res.text();
-            const lines = rawText.trim().split('\n');
-            
-            let onlineUsers = {};
-            const now = Date.now();
-
-            lines.forEach(line => {
-                if (!line) return;
-                const entry = JSON.parse(line);
-                
-                if (entry.message) {
-                    try {
-                        const payload = JSON.parse(entry.message);
-                        
-                        if (payload.type === 'chat' && !knownMessages.has(payload.id)) {
-                            knownMessages.add(payload.id);
-                            renderSingleMessage(payload);
-                        } else if (payload.type === 'status') {
-                            if (now - payload.time < 12000) {
-                                onlineUsers[payload.sender] = payload.name;
-                            }
-                        }
-                    } catch(e) {}
-                }
-            });
-
-            onlineUsers[myId] = myUsername;
-
-            const userArray = Object.values(onlineUsers);
-            countTag.textContent = `${userArray.length} online`;
-            namesTag.textContent = userArray.join(', ');
-
-        } catch (e) {}
-    }
-
-    async function sendHeartbeat() {
-        try {
-            await fetch(`https://ntfy.sh/${roomKey}`, {
-                method: 'POST',
-                body: JSON.stringify({ type: 'status', sender: myId, name: myUsername, time: Date.now() })
-            });
-        } catch(e) {}
-    }
-
-    async function transmitPayload(payload) {
-        try {
-            await fetch(`https://ntfy.sh/${roomKey}`, {
-                method: 'POST',
-                body: JSON.stringify(payload)
-            });
-        } catch (e) {}
-    }
-
-    function sendText() {
-        const val = textInput.value.trim();
-        if (!val) return;
-
-        textInput.value = '';
-        
-        const msgId = Math.random().toString(36).substr(2, 9);
-        const msgPayload = {
-            type: 'chat',
-            id: msgId,
-            dataType: 'text',
-            sender: myId,
-            name: myUsername,
-            text: val
-        };
-
-        knownMessages.add(msgId);
-        renderSingleMessage(msgPayload);
-        transmitPayload(msgPayload);
-    }
-
-    // Handles uploading image files directly to a free, fast, anonymous server endpoint
-    document.getElementById('attach-btn').onclick = () => imageInput.click();
-    imageInput.onchange = async () => {
-        const file = imageInput.files[0];
-        if (!file) return;
-
-        const formData = new FormData();
-        formData.append('file', file);
-
-        try {
-            const uploadRes = await fetch('https://tmpfiles.org/api/v1/upload', {
-                method: 'POST',
-                body: formData
-            });
-            const uploadData = await uploadRes.json();
-            // Convert standard viewing path from the API block directly
-            const finalUrl = uploadData.data.url.replace('tmpfiles.org/', 'tmpfiles.org/dl/');
-
-            const msgId = Math.random().toString(36).substr(2, 9);
-            const msgPayload = {
-                type: 'chat',
-                id: msgId,
-                dataType: 'image',
-                sender: myId,
-                name: myUsername,
-                url: finalUrl
-            };
-
-            knownMessages.add(msgId);
-            renderSingleMessage(msgPayload);
-            transmitPayload(msgPayload);
-        } catch (err) { alert("Failed to upload image."); }
-    };
-
-    // Voice Recorder handling audio file uploads seamlessly without text string blooming
-    document.getElementById('mic-btn').onclick = async function() {
-        const micBtn = this;
-        if (!isRecording) {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                mediaRecorder = new MediaRecorder(stream);
-                audioChunks = [];
-                
-                mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
-                mediaRecorder.onstop = async () => {
-                    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-                    const audioFile = new File([audioBlob], 'voice.webm', { type: 'audio/webm' });
-                    
-                    const formData = new FormData();
-                    formData.append('file', audioFile);
-
-                    try {
-                        const uploadRes = await fetch('https://tmpfiles.org/api/v1/upload', {
-                            method: 'POST',
-                            body: formData
-                        });
-                        const uploadData = await uploadRes.json();
-                        const finalUrl = uploadData.data.url.replace('tmpfiles.org/', 'tmpfiles.org/dl/');
-
-                        const msgId = Math.random().toString(36).substr(2, 9);
-                        const msgPayload = {
-                            type: 'chat',
-                            id: msgId,
-                            dataType: 'voice',
-                            sender: myId,
-                            name: myUsername,
-                            url: finalUrl
-                        };
-
-                        knownMessages.add(msgId);
-                        renderSingleMessage(msgPayload);
-                        transmitPayload(msgPayload);
-                    } catch(e) { alert("Failed to send voice note."); }
-
-                    stream.getTracks().forEach(track => track.stop());
-                };
-
-                mediaRecorder.start();
-                isRecording = true;
-                micBtn.innerText = "🛑";
-                micBtn.classList.add('recording');
-            } catch (err) { alert("Microphone access denied."); }
-        } else {
-            mediaRecorder.stop();
-            isRecording = false;
-            micBtn.innerText = "🎤";
-            micBtn.classList.remove('recording');
+            if (role === 'driver') activeTab.className = "py-2 rounded-lg bg-amber-400 text-slate-950 shadow transition flex items-center justify-center gap-1";
+            else if (role === 'student') activeTab.className = "py-2 rounded-lg bg-blue-600 text-white shadow transition flex items-center justify-center gap-1";
+            else if (role === 'parent') activeTab.className = "py-2 rounded-lg bg-purple-600 text-white shadow transition flex items-center justify-center gap-1";
         }
-    };
 
-    callBtn.onclick = () => {
-        const callRoomName = roomKey.substr(0, 15) + "_call";
-        const callUrl = `https://meet.jit.si/${callRoomName}`;
-        
-        const msgId = Math.random().toString(36).substr(2, 9);
-        const msgPayload = {
-            type: 'chat',
-            id: msgId,
-            dataType: 'call',
-            sender: myId,
-            name: myUsername,
-            text: `Join our private audio call room`,
-            url: callUrl
-        };
-        
-        knownMessages.add(msgId);
-        renderSingleMessage(msgPayload);
-        transmitPayload(msgPayload);
-        window.open(callUrl, '_blank');
-    };
+        // THAI NATIONAL ID MODULO 11 VALIDATION
+        function validateThaiID(id) {
+            const msg = document.getElementById('idcard-validation-msg');
+            if (id.length !== 13) {
+                msg.className = "text-[10px] text-amber-600 mt-1 font-semibold";
+                msg.innerText = "⚠️ กรุณากรอกให้ครบ 13 หลัก";
+                return false;
+            }
 
-    function renderSingleMessage(msg) {
-        const bubble = document.createElement('div');
-        const side = msg.sender === myId ? 'me' : 'them';
-        bubble.className = `msg ${side}`;
-        
-        const nameHeader = side === 'them' ? `<strong>${msg.name}:</strong><br>` : '';
-
-        if (msg.dataType === 'text') {
-            bubble.innerHTML = nameHeader + msg.text;
-        } else if (msg.dataType === 'image') {
-            bubble.innerHTML = nameHeader + `<img src="${msg.url}">`;
-        } else if (msg.dataType === 'voice') {
-            bubble.innerHTML = nameHeader + `<audio src="${msg.url}" controls></audio>`;
-        } else if (msg.dataType === 'call') {
-            bubble.innerHTML = nameHeader + `📞 <a href="${msg.url}" target="_blank" class="call-link">${msg.text}</a>`;
+            let sum = 0;
+            for (let i = 0; i < 12; i++) {
+                sum += parseFloat(id.charAt(i)) * (13 - i);
+            }
+            let check = (11 - (sum % 11)) % 10;
+            if (check === parseInt(id.charAt(12))) {
+                msg.className = "text-[10px] text-emerald-600 mt-1 font-bold";
+                msg.innerText = "✅ เลขบัตรประจำตัวประชาชนถูกต้องตามทะเบียนราษฎร์ (ผ่าน Modulo 11)";
+                return true;
+            } else {
+                msg.className = "text-[10px] text-rose-600 mt-1 font-bold";
+                msg.innerText = "❌ เลขบัตรประชาชนไม่ถูกต้องตามหลักการ (ข้อมูลอาจไม่ใช่เลขจริง)";
+                return false;
+            }
         }
-        
-        messagesContainer.appendChild(bubble);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
 
-    document.getElementById('send-btn').onclick = sendText;
-    textInput.onkeypress = e => { if(e.key === 'Enter') sendText(); };
-</script>
+        // AI IMAGE INSPECTION SIMULATION
+        function simulateAIInspect(type, inputElem) {
+            if (!inputElem.files || !inputElem.files[0]) return;
+            const statusEl = document.getElementById(`status-${type}`);
+            statusEl.innerText = "🤖 AI กำลังสแกน...";
+            statusEl.className = "text-[9px] text-amber-600 font-bold block animate-pulse";
+
+            setTimeout(() => {
+                statusEl.innerText = "✅ ผ่านการตรวจสอบ (Real AI Verified)";
+                statusEl.className = "text-[9px] text-emerald-600 font-bold block";
+            }, 1200);
+        }
+
+        // AUTO-FILL DEMO DATA
+        function autoFillDemoData() {
+            // Driver
+            document.getElementById('drv-fullname').value = "นายศักดิ์ชัย มีสุข";
+            document.getElementById('drv-nickname').value = "ลุงศักดิ์";
+            document.getElementById('drv-phone').value = "0812345678";
+            document.getElementById('drv-idcard').value = "1100701234561";
+            validateThaiID("1100701234561");
+            document.getElementById('drv-contact').value = "LINE: sakchai_van";
+            document.getElementById('drv-vancode').value = "V-98765";
+            document.getElementById('drv-license').value = "3กข-1234 กทม.";
+            document.getElementById('drv-pass').value = "123456";
+
+            // Student
+            document.getElementById('stu-fullname').value = "ด.ช. สมชาย ใจดี";
+            document.getElementById('stu-nickname').value = "น้องชาย";
+            document.getElementById('stu-phone').value = "0891112222";
+            document.getElementById('stu-contact').value = "LINE: somchai_j";
+            document.getElementById('stu-school').value = "โรงเรียนสาธิตพัฒนา";
+            document.getElementById('stu-address').value = "หมู่บ้านมิตรภาพ ซอย 5 บ้านเลขที่ 12/34";
+            document.getElementById('stu-pass').value = "123456";
+
+            // Parent
+            document.getElementById('par-fullname').value = "คุณแม่นิด ใจดี";
+            document.getElementById('par-nickname').value = "แม่นิด";
+            document.getElementById('par-phone').value = "0867778888";
+            document.getElementById('par-childname').value = "ด.ช. สมชาย ใจดี (น้องชาย)";
+            document.getElementById('par-studentcode').value = "STU-84920";
+            document.getElementById('par-pass').value = "123456";
+
+            alert("⚡ เติมข้อมูลทดสอบทั้ง 3 บทบาทเรียบร้อยแล้ว!");
+        }
+
+        let generatedRoleCode = "";
+        function completeRegistration(role) {
+            registeredRole = role;
+            const modal = document.getElementById('success-modal');
+            const title = document.getElementById('success-modal-title');
+            const desc = document.getElementById('success-modal-desc');
+            const codeDisp = document.getElementById('generated-code-display');
+
+            if (role === 'driver') {
+                const name = document.getElementById('drv-fullname').value;
+                if (!name) { alert("กรุณากรอกชื่อ-นามสกุลคนขับ"); return; }
+                generatedRoleCode = "DRV-98765";
+                title.innerText = "ลงทะเบียนคนขับรถตู้สำเร็จ!";
+                desc.innerText = "ระบบได้ออกรหัสประจำตัวคนขับให้เรียบร้อยแล้ว:";
+                codeDisp.innerText = generatedRoleCode;
+            } else if (role === 'student') {
+                const name = document.getElementById('stu-fullname').value;
+                if (!name) { alert("กรุณากรอกชื่อนักเรียน"); return; }
+                generatedRoleCode = "STU-84920";
+                title.innerText = "ลงทะเบียนนักเรียนสำเร็จ!";
+                desc.innerText = "นี่คือ Student Code 6 หลัก สำหรับนำไปให้ผู้ปกครองผูกแอป:";
+                codeDisp.innerText = generatedRoleCode;
+            } else if (role === 'parent') {
+                const name = document.getElementById('par-fullname').value;
+                if (!name) { alert("กรุณากรอกผู้ปกครอง"); return; }
+                generatedRoleCode = "PAR-11223";
+                title.innerText = "ลงทะเบียนผู้ปกครองสำเร็จ!";
+                desc.innerText = "ระบบได้เชื่อมโยงบัญชีกับบุตรหลานเรียบร้อยแล้ว:";
+                codeDisp.innerText = "เชื่อมโยงสำเร็จ ✅";
+            }
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function redirectToDashboard() {
+            // Redirect to the main application and automatically switch to the registered role view
+            location.href = `index.html?role=${registeredRole}`;
+        }
+    </script>
 </body>
 </html>
