@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ลงทะเบียนเข้าใช้งาน - School Van Track Pro</title>
+    <title>เข้าสู่ระบบ / ลงทะเบียน - School Van Track Pro</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome 6 -->
@@ -18,20 +18,30 @@
 </head>
 <body class="min-h-screen flex items-center justify-center p-3 sm:p-6">
 
-    <!-- MAIN REGISTRATION CONTAINER -->
+    <!-- MAIN CONTAINER -->
     <div class="w-full max-w-md bg-white min-h-[850px] rounded-[2.5rem] shadow-2xl flex flex-col justify-between overflow-hidden relative border border-slate-700/50 my-auto">
 
-        <!-- HEADER & ROLE SELECTOR -->
+        <!-- HEADER & MAIN VIEW SWITCHER -->
         <div class="bg-slate-900 text-white px-5 py-4 space-y-3 border-b border-slate-800">
             <div class="flex justify-between items-center">
-                <h1 class="text-sm font-bold text-amber-400 flex items-center gap-1.5">
+                <h1 class="text-sm font-bold text-amber-400 flex items-center gap-1.5" id="header-title">
                     <i class="fa-solid fa-id-card"></i> ระบบลงทะเบียน School Van Track
                 </h1>
                 <span class="text-[10px] bg-slate-800 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-700 font-mono">v4.6 Secure</span>
             </div>
 
-            <!-- Role Selector Tabs -->
-            <div class="grid grid-cols-3 gap-1.5 bg-slate-800 p-1 rounded-xl text-xs font-bold">
+            <!-- Mode Switcher (Register vs Login) -->
+            <div class="grid grid-cols-2 gap-1.5 bg-slate-800 p-1 rounded-xl text-xs font-bold">
+                <button onclick="switchMainView('register')" id="mode-tab-register" class="py-2 rounded-lg bg-indigo-600 text-white shadow transition flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-user-plus"></i> ลงทะเบียน
+                </button>
+                <button onclick="switchMainView('login')" id="mode-tab-login" class="py-2 rounded-lg text-slate-300 hover:text-white transition flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-right-to-bracket"></i> เข้าสู่ระบบ
+                </button>
+            </div>
+
+            <!-- Role Selector Tabs (Only visible when registering) -->
+            <div id="role-selector-wrapper" class="grid grid-cols-3 gap-1.5 bg-slate-800/60 p-1 rounded-xl text-xs font-bold">
                 <button onclick="switchRegRole('driver')" id="reg-tab-driver" class="py-2 rounded-lg bg-amber-400 text-slate-950 shadow transition flex items-center justify-center gap-1">
                     <i class="fa-solid fa-van-shuttle"></i> คนขับรถตู้
                 </button>
@@ -48,241 +58,277 @@
         <div class="flex-1 p-5 overflow-y-auto custom-scroll space-y-4">
             
             <!-- DEMO AUTO-FILL BUTTON -->
-            <div class="flex justify-between items-center bg-indigo-50 border border-indigo-200 p-2.5 rounded-2xl">
+            <div id="demo-autofill-box" class="flex justify-between items-center bg-indigo-50 border border-indigo-200 p-2.5 rounded-2xl">
                 <span class="text-[11px] font-bold text-indigo-900">⚡ เติมข้อมูลทดสอบอัตโนมัติ:</span>
                 <button onclick="autoFillDemoData()" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] font-bold rounded-xl shadow transition">
                     🧪 Auto-Fill
                 </button>
             </div>
 
-            <!-- ================= FORM 1: DRIVER REGISTRATION ================= -->
-            <div id="form-role-driver" class="space-y-3.5">
-                <div class="border-b pb-2">
-                    <h2 class="text-xs font-bold text-slate-900">📝 ลงทะเบียนสมัครสมาชิก "คนขับรถตู้"</h2>
-                    <p class="text-[10px] text-slate-500">กรอกข้อมูลส่วนตัว ใบขับขี่ และรูปรถเพื่อตรวจสอบความปลอดภัย</p>
+            <!-- ================= VIEW 1: REGISTRATION FORMS ================= -->
+            <div id="view-register" class="space-y-4">
+                
+                <!-- FORM 1: DRIVER REGISTRATION -->
+                <div id="form-role-driver" class="space-y-3.5">
+                    <div class="border-b pb-2">
+                        <h2 class="text-xs font-bold text-slate-900">📝 ลงทะเบียนสมัครสมาชิก "คนขับรถตู้"</h2>
+                        <p class="text-[10px] text-slate-500">กรอกข้อมูลส่วนตัว ใบขับขี่ และรูปรถเพื่อตรวจสอบความปลอดภัย</p>
+                    </div>
+
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">ชื่อจริง - นามสกุลจริง *</label>
+                            <input type="text" id="drv-fullname" placeholder="เช่น นายศักดิ์ชัย มีสุข" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-amber-500">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="font-bold text-slate-700 block mb-1">ชื่อเล่น *</label>
+                                <input type="text" id="drv-nickname" placeholder="เช่น ลุงศักดิ์" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="font-bold text-slate-700 block mb-1">เบอร์โทรศัพท์ (ใช้เข้าสู่ระบบ) *</label>
+                                <input type="tel" id="drv-phone" placeholder="0812345678" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">เลขบัตรประจำตัวประชาชน 13 หลัก * (ตรวจสอบ Modulo 11)</label>
+                            <input type="text" id="drv-idcard" placeholder="1100701234561" maxlength="13" oninput="validateThaiID(this.value)" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold focus:outline-none">
+                            <p id="idcard-validation-msg" class="text-[10px] text-slate-400 mt-1">กรุณากรอกเลข 13 หลักให้ถูกต้องตามทะเบียนราษฎร์</p>
+                        </div>
+
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">ช่องทางการติดต่ออื่น (LINE ID / Facebook)</label>
+                            <input type="text" id="drv-contact" placeholder="เช่น LINE: sakchai_van" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="font-bold text-slate-700 block mb-1">รหัสรถตู้ประจำตัว *</label>
+                                <input type="text" id="drv-vancode" placeholder="V-98765" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="font-bold text-slate-700 block mb-1">เลขทะเบียนรถตู้ *</label>
+                                <input type="text" id="drv-license" placeholder="3กข-1234 กทม." class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:outline-none">
+                            </div>
+                        </div>
+
+                        <!-- AI Image Verification Box -->
+                        <div class="p-3 bg-amber-50/80 border border-amber-200 rounded-2xl space-y-2.5">
+                            <p class="font-bold text-amber-950 text-xs flex items-center gap-1.5">
+                                <i class="fa-solid fa-shield-halved text-amber-600"></i> AI ตรวจสอบความถูกต้องของรูปถ่าย (Image Verification)
+                            </p>
+                            
+                            <div class="grid grid-cols-3 gap-2 text-center">
+                                <div class="p-2 bg-white rounded-xl border border-amber-100 space-y-1">
+                                    <p class="text-[10px] font-bold text-slate-700">รูปหน้าตรง</p>
+                                    <input type="file" id="file-drv-face" accept="image/*" class="hidden" onchange="simulateAIInspect('drv-face', this)">
+                                    <button type="button" onclick="document.getElementById('file-drv-face').click()" class="w-full py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 text-[10px] font-bold rounded-lg transition">
+                                        📷 อัปโหลด
+                                    </button>
+                                    <span id="status-drv-face" class="text-[9px] text-slate-400 block">ยังไม่ตรวจ</span>
+                                </div>
+
+                                <div class="p-2 bg-white rounded-xl border border-amber-100 space-y-1">
+                                    <p class="text-[10px] font-bold text-slate-700">รูปใบขับขี่</p>
+                                    <input type="file" id="file-drv-license" accept="image/*" class="hidden" onchange="simulateAIInspect('drv-license', this)">
+                                    <button type="button" onclick="document.getElementById('file-drv-license').click()" class="w-full py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 text-[10px] font-bold rounded-lg transition">
+                                        📷 อัปโหลด
+                                    </button>
+                                    <span id="status-drv-license" class="text-[9px] text-slate-400 block">ยังไม่ตรวจ</span>
+                                </div>
+
+                                <div class="p-2 bg-white rounded-xl border border-amber-100 space-y-1">
+                                    <p class="text-[10px] font-bold text-slate-700">รูปรถตู้จริง</p>
+                                    <input type="file" id="file-drv-van" accept="image/*" class="hidden" onchange="simulateAIInspect('drv-van', this)">
+                                    <button type="button" onclick="document.getElementById('file-drv-van').click()" class="w-full py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 text-[10px] font-bold rounded-lg transition">
+                                        📷 อัปโหลด
+                                    </button>
+                                    <span id="status-drv-van" class="text-[9px] text-slate-400 block">ยังไม่ตรวจ</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">ตั้งรหัสผ่าน 6 หลัก สำหรับเข้าสู่ระบบ *</label>
+                            <input type="password" id="drv-pass" placeholder="******" maxlength="6" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold focus:outline-none">
+                        </div>
+                    </div>
+
+                    <button onclick="completeRegistration('driver')" class="w-full py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-2xl text-xs shadow-lg transition flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-user-check"></i>
+                        <span>🚀 ยืนยันการลงทะเบียน</span>
+                    </button>
                 </div>
 
-                <div class="space-y-3 text-xs">
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-1">ชื่อจริง - นามสกุลจริง *</label>
-                        <input type="text" id="drv-fullname" placeholder="เช่น นายศักดิ์ชัย มีสุข" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-amber-500">
+                <!-- FORM 2: STUDENT REGISTRATION -->
+                <div id="form-role-student" class="space-y-3.5 hidden">
+                    <div class="border-b pb-2">
+                        <h2 class="text-xs font-bold text-slate-900">📝 ลงทะเบียนสมัครสมาชิก "นักเรียน"</h2>
+                        <p class="text-[10px] text-slate-500">กรอกข้อมูลสถาบันและจุดรอรับ เพื่อสร้าง Student Code สำหรับให้ผู้ปกครองผูกแอป</p>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="space-y-3 text-xs">
                         <div>
-                            <label class="font-bold text-slate-700 block mb-1">ชื่อเล่น *</label>
-                            <input type="text" id="drv-nickname" placeholder="เช่น ลุงศักดิ์" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                            <label class="font-bold text-slate-700 block mb-1">ชื่อจริง - นามสกุลจริงนักเรียน *</label>
+                            <input type="text" id="stu-fullname" placeholder="เช่น ด.ช. สมชาย ใจดี" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-blue-500">
                         </div>
-                        <div>
-                            <label class="font-bold text-slate-700 block mb-1">เบอร์โทรศัพท์ *</label>
-                            <input type="tel" id="drv-phone" placeholder="0812345678" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
-                        </div>
-                    </div>
 
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-1">เลขบัตรประจำตัวประชาชน 13 หลัก * (ตรวจสอบ Modulo 11)</label>
-                        <input type="text" id="drv-idcard" placeholder="1100701234561" maxlength="13" oninput="validateThaiID(this.value)" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold focus:outline-none">
-                        <p id="idcard-validation-msg" class="text-[10px] text-slate-400 mt-1">กรุณากรอกเลข 13 หลักให้ถูกต้องตามทะเบียนราษฎร์</p>
-                    </div>
-
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-1">ช่องทางการติดต่ออื่น (LINE ID / Facebook)</label>
-                        <input type="text" id="drv-contact" placeholder="เช่น LINE: sakchai_van" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label class="font-bold text-slate-700 block mb-1">รหัสรถตู้ประจำตัว *</label>
-                            <input type="text" id="drv-vancode" placeholder="V-98765" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="font-bold text-slate-700 block mb-1">เลขทะเบียนรถตู้ *</label>
-                            <input type="text" id="drv-license" placeholder="3กข-1234 กทม." class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold focus:outline-none">
-                        </div>
-                    </div>
-
-                    <!-- AI Image Verification Box: Driver Face & License & Van Photo -->
-                    <div class="p-3 bg-amber-50/80 border border-amber-200 rounded-2xl space-y-2.5">
-                        <p class="font-bold text-amber-950 text-xs flex items-center gap-1.5">
-                            <i class="fa-solid fa-shield-halved text-amber-600"></i> AI ตรวจสอบความถูกต้องของรูปถ่าย (Image Verification)
-                        </p>
-                        
-                        <div class="grid grid-cols-3 gap-2 text-center">
-                            <div class="p-2 bg-white rounded-xl border border-amber-100 space-y-1">
-                                <p class="text-[10px] font-bold text-slate-700">รูปหน้าตรง</p>
-                                <input type="file" id="file-drv-face" accept="image/*" class="hidden" onchange="simulateAIInspect('drv-face', this)">
-                                <button type="button" onclick="document.getElementById('file-drv-face').click()" class="w-full py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 text-[10px] font-bold rounded-lg transition">
-                                    📷 อัปโหลด
-                                </button>
-                                <span id="status-drv-face" class="text-[9px] text-slate-400 block">ยังไม่ตรวจ</span>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="font-bold text-slate-700 block mb-1">ชื่อเล่น *</label>
+                                <input type="text" id="stu-nickname" placeholder="เช่น น้องชาย" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
                             </div>
-
-                            <div class="p-2 bg-white rounded-xl border border-amber-100 space-y-1">
-                                <p class="text-[10px] font-bold text-slate-700">รูปใบขับขี่</p>
-                                <input type="file" id="file-drv-license" accept="image/*" class="hidden" onchange="simulateAIInspect('drv-license', this)">
-                                <button type="button" onclick="document.getElementById('file-drv-license').click()" class="w-full py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 text-[10px] font-bold rounded-lg transition">
-                                    📷 อัปโหลด
-                                </button>
-                                <span id="status-drv-license" class="text-[9px] text-slate-400 block">ยังไม่ตรวจ</span>
-                            </div>
-
-                            <div class="p-2 bg-white rounded-xl border border-amber-100 space-y-1">
-                                <p class="text-[10px] font-bold text-slate-700">รูปรถตู้จริง</p>
-                                <input type="file" id="file-drv-van" accept="image/*" class="hidden" onchange="simulateAIInspect('drv-van', this)">
-                                <button type="button" onclick="document.getElementById('file-drv-van').click()" class="w-full py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 text-[10px] font-bold rounded-lg transition">
-                                    📷 อัปโหลด
-                                </button>
-                                <span id="status-drv-van" class="text-[9px] text-slate-400 block">ยังไม่ตรวจ</span>
+                            <div>
+                                <label class="font-bold text-slate-700 block mb-1">เบอร์โทรศัพท์ (ใช้เข้าสู่ระบบ) *</label>
+                                <input type="tel" id="stu-phone" placeholder="0891112222" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
                             </div>
                         </div>
+
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">ช่องทางการติดต่ออื่น (LINE ID)</label>
+                            <input type="text" id="stu-contact" placeholder="LINE: somchai_j" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">ชื่อสถาบัน / โรงเรียนปลายทาง *</label>
+                            <input type="text" id="stu-school" placeholder="เช่น โรงเรียนสาธิตพัฒนา" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">ที่อยู่บ้าน หรือพิกัด Google Maps (จุดรอรับ-ส่ง) *</label>
+                            <textarea id="stu-address" rows="2" placeholder="เช่น หมู่บ้านมิตรภาพ ซอย 5 บ้านเลขที่ 12/34" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none"></textarea>
+                        </div>
+
+                        <!-- AI Face Inspection for Student -->
+                        <div class="p-3 bg-blue-50/80 border border-blue-200 rounded-2xl space-y-2">
+                            <p class="font-bold text-blue-950 text-xs flex items-center gap-1.5">
+                                <i class="fa-solid fa-face-smile text-blue-600"></i> AI ตรวจสอบรูปถ่ายหน้าตรงนักเรียน
+                            </p>
+                            <div class="flex items-center gap-2">
+                                <input type="file" id="file-stu-face" accept="image/*" class="hidden" onchange="simulateAIInspect('stu-face', this)">
+                                <button type="button" onclick="document.getElementById('file-stu-face').click()" class="py-2 px-4 bg-blue-100 hover:bg-blue-200 text-blue-900 text-xs font-bold rounded-xl transition">
+                                    📷 อัปโหลดรูปนักเรียน
+                                </button>
+                                <span id="status-stu-face" class="text-xs text-slate-500 font-semibold">ยังไม่ตรวจสอบ</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">ตั้งรหัสผ่าน 6 หลัก สำหรับเข้าสู่ระบบนักเรียน *</label>
+                            <input type="password" id="stu-pass" placeholder="******" maxlength="6" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold focus:outline-none">
+                        </div>
                     </div>
 
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-1">ตั้งรหัสผ่าน 6 หลัก สำหรับเข้าสู่ระบบ *</label>
-                        <input type="password" id="drv-pass" placeholder="******" maxlength="6" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold focus:outline-none">
-                    </div>
+                    <button onclick="completeRegistration('student')" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl text-xs shadow-lg transition flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-user-graduate"></i>
+                        <span>🚀 ยืนยันการลงทะเบียน</span>
+                    </button>
                 </div>
 
-                <button onclick="completeRegistration('driver')" class="w-full py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-2xl text-xs shadow-lg transition flex items-center justify-center gap-1.5">
-                    <i class="fa-solid fa-user-check"></i>
-                    <span>🚀 ยืนยันการลงทะเบียน (เข้าสู่หน้าคนขับรถตู้)</span>
-                </button>
+                <!-- FORM 3: PARENT REGISTRATION -->
+                <div id="form-role-parent" class="space-y-3.5 hidden">
+                    <div class="border-b pb-2">
+                        <h2 class="text-xs font-bold text-slate-900">📝 ลงทะเบียนสมัครสมาชิก "ผู้ปกครอง"</h2>
+                        <p class="text-[10px] text-slate-500">กรอกรหัสประจำตัวนักเรียน 6 หลักของบุตรหลาน เพื่อผูกบัญชีติดตามรถตู้</p>
+                    </div>
+
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">ชื่อจริง - นามสกุลจริงผู้ปกครอง *</label>
+                            <input type="text" id="par-fullname" placeholder="เช่น คุณแม่นิด ใจดี" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-purple-500">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="font-bold text-slate-700 block mb-1">ชื่อเล่นผู้ปกครอง (ไม่บังคับ)</label>
+                                <input type="text" id="par-nickname" placeholder="เช่น แม่นิด" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="font-bold text-slate-700 block mb-1">เบอร์โทรศัพท์ (ใช้เข้าสู่ระบบ) *</label>
+                                <input type="tel" id="par-phone" placeholder="0867778888" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">ชื่อของนักเรียน (บุตรหลาน) *</label>
+                            <input type="text" id="par-childname" placeholder="เช่น ด.ช. สมชาย ใจดี (น้องชาย)" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
+                        </div>
+
+                        <div class="p-3 bg-purple-50 border border-purple-200 rounded-2xl space-y-1.5">
+                            <label class="font-bold text-purple-950 block">รหัสประจำตัวนักเรียน (Student Code 6 หลัก) *</label>
+                            <input type="text" id="par-studentcode" placeholder="เช่น STU-84920" maxlength="9" class="w-full p-2.5 bg-white border border-purple-300 rounded-xl font-mono font-bold text-purple-900 focus:outline-none uppercase">
+                            <p class="text-[9px] text-purple-700">รหัสนี้ได้จากหน้าลงทะเบียนของนักเรียนเพื่อเชื่อมโยงข้อมูลติดตาม</p>
+                        </div>
+
+                        <!-- AI Face Inspection for Parent (Optional) -->
+                        <div class="p-3 bg-purple-50/60 border border-purple-200 rounded-2xl space-y-2">
+                            <p class="font-bold text-purple-950 text-xs flex items-center gap-1.5">
+                                <i class="fa-solid fa-camera text-purple-600"></i> อัปโหลดรูปผู้ปกครอง (ไม่บังคับ)
+                            </p>
+                            <div class="flex items-center gap-2">
+                                <input type="file" id="file-par-face" accept="image/*" class="hidden" onchange="simulateAIInspect('par-face', this)">
+                                <button type="button" onclick="document.getElementById('file-par-face').click()" class="py-2 px-4 bg-purple-100 hover:bg-purple-200 text-purple-900 text-xs font-bold rounded-xl transition">
+                                    📷 เลือกรูปภาพ
+                                </button>
+                                <span id="status-par-face" class="text-xs text-slate-500 font-semibold">ไม่ได้บังคับ</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">ตั้งรหัสผ่าน 6 หลัก สำหรับเข้าสู่ระบบผู้ปกครอง *</label>
+                            <input type="password" id="par-pass" placeholder="******" maxlength="6" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold focus:outline-none">
+                        </div>
+                    </div>
+
+                    <button onclick="completeRegistration('parent')" class="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-2xl text-xs shadow-lg transition flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-user-group"></i>
+                        <span>🚀 ยืนยันการลงทะเบียน</span>
+                    </button>
+                </div>
+
             </div>
 
-            <!-- ================= FORM 2: STUDENT REGISTRATION ================= -->
-            <div id="form-role-student" class="space-y-3.5 hidden">
+            <!-- ================= VIEW 2: LOGIN FORM ================= -->
+            <div id="view-login" class="space-y-4 hidden">
                 <div class="border-b pb-2">
-                    <h2 class="text-xs font-bold text-slate-900">📝 ลงทะเบียนสมัครสมาชิก "นักเรียน"</h2>
-                    <p class="text-[10px] text-slate-500">กรอกข้อมูลสถาบันและจุดรอรับ เพื่อสร้าง Student Code สำหรับให้ผู้ปกครองผูกแอป</p>
+                    <h2 class="text-xs font-bold text-slate-900">🔑 เข้าสู่ระบบบัญชีของคุณ</h2>
+                    <p class="text-[10px] text-slate-500">กรอกเบอร์โทรศัพท์ และรหัสผ่านที่ได้ลงทะเบียนไว้</p>
                 </div>
 
                 <div class="space-y-3 text-xs">
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">ชื่อจริง - นามสกุลจริงนักเรียน *</label>
-                        <input type="text" id="stu-fullname" placeholder="เช่น ด.ช. สมชาย ใจดี" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-blue-500">
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label class="font-bold text-slate-700 block mb-1">ชื่อเล่น *</label>
-                            <input type="text" id="stu-nickname" placeholder="เช่น น้องชาย" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="font-bold text-slate-700 block mb-1">เบอร์โทรศัพท์นักเรียน *</label>
-                            <input type="tel" id="stu-phone" placeholder="0891112222" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
-                        </div>
+                        <label class="font-bold text-slate-700 block mb-1">เบอร์โทรศัพท์ *</label>
+                        <input type="tel" id="login-phone" placeholder="เช่น 0812345678" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-indigo-500">
                     </div>
 
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">ช่องทางการติดต่ออื่น (LINE ID)</label>
-                        <input type="text" id="stu-contact" placeholder="LINE: somchai_j" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
-                    </div>
-
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-1">ชื่อสถาบัน / โรงเรียนปลายทาง *</label>
-                        <input type="text" id="stu-school" placeholder="เช่น โรงเรียนสาธิตพัฒนา" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
-                    </div>
-
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-1">ที่อยู่บ้าน หรือพิกัด Google Maps (จุดรอรับ-ส่ง) *</label>
-                        <textarea id="stu-address" rows="2" placeholder="เช่น หมู่บ้านมิตรภาพ ซอย 5 บ้านเลขที่ 12/34" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none"></textarea>
-                    </div>
-
-                    <!-- AI Face Inspection for Student -->
-                    <div class="p-3 bg-blue-50/80 border border-blue-200 rounded-2xl space-y-2">
-                        <p class="font-bold text-blue-950 text-xs flex items-center gap-1.5">
-                            <i class="fa-solid fa-face-smile text-blue-600"></i> AI ตรวจสอบรูปถ่ายหน้าตรงนักเรียน
-                        </p>
-                        <div class="flex items-center gap-2">
-                            <input type="file" id="file-stu-face" accept="image/*" class="hidden" onchange="simulateAIInspect('stu-face', this)">
-                            <button type="button" onclick="document.getElementById('file-stu-face').click()" class="py-2 px-4 bg-blue-100 hover:bg-blue-200 text-blue-900 text-xs font-bold rounded-xl transition">
-                                📷 อัปโหลดรูปนักเรียน
-                            </button>
-                            <span id="status-stu-face" class="text-xs text-slate-500 font-semibold">ยังไม่ตรวจสอบ</span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-1">ตั้งรหัสผ่าน 6 หลัก สำหรับเข้าสู่ระบบนักเรียน *</label>
-                        <input type="password" id="stu-pass" placeholder="******" maxlength="6" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold focus:outline-none">
+                        <label class="font-bold text-slate-700 block mb-1">รหัสผ่าน (6 หลัก) *</label>
+                        <input type="password" id="login-pass" placeholder="******" maxlength="6" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold focus:outline-none focus:border-indigo-500">
                     </div>
                 </div>
 
-                <button onclick="completeRegistration('student')" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl text-xs shadow-lg transition flex items-center justify-center gap-1.5">
-                    <i class="fa-solid fa-user-graduate"></i>
-                    <span>🚀 ยืนยันการลงทะเบียน (เข้าสู่หน้านักเรียน)</span>
+                <button onclick="performLogin()" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl text-xs shadow-lg transition flex items-center justify-center gap-1.5 mt-4">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <span>🚀 เข้าสู่ระบบ (Login)</span>
                 </button>
-            </div>
 
-            <!-- ================= FORM 3: PARENT REGISTRATION ================= -->
-            <div id="form-role-parent" class="space-y-3.5 hidden">
-                <div class="border-b pb-2">
-                    <h2 class="text-xs font-bold text-slate-900">📝 ลงทะเบียนสมัครสมาชิก "ผู้ปกครอง"</h2>
-                    <p class="text-[10px] text-slate-500">กรอกรหัสประจำตัวนักเรียน 6 หลักของบุตรหลาน เพื่อผูกบัญชีติดตามรถตู้</p>
+                <div class="text-center pt-2">
+                    <button onclick="switchMainView('register')" class="text-xs text-indigo-600 hover:underline font-semibold">
+                        ยังไม่มีบัญชี? คลิกที่นี่เพื่อลงทะเบียนใหม่
+                    </button>
                 </div>
-
-                <div class="space-y-3 text-xs">
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-1">ชื่อจริง - นามสกุลจริงผู้ปกครอง *</label>
-                        <input type="text" id="par-fullname" placeholder="เช่น คุณแม่นิด ใจดี" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none focus:border-purple-500">
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label class="font-bold text-slate-700 block mb-1">ชื่อเล่นผู้ปกครอง (ไม่บังคับ)</label>
-                            <input type="text" id="par-nickname" placeholder="เช่น แม่นิด" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
-                        </div>
-                        <div>
-                            <label class="font-bold text-slate-700 block mb-1">เบอร์โทรศัพท์ผู้ปกครอง *</label>
-                            <input type="tel" id="par-phone" placeholder="0867778888" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-1">ชื่อของนักเรียน (บุตรหลาน) *</label>
-                        <input type="text" id="par-childname" placeholder="เช่น ด.ช. สมชาย ใจดี (น้องชาย)" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:outline-none">
-                    </div>
-
-                    <div class="p-3 bg-purple-50 border border-purple-200 rounded-2xl space-y-1.5">
-                        <label class="font-bold text-purple-950 block">รหัสประจำตัวนักเรียน (Student Code 6 หลัก) *</label>
-                        <input type="text" id="par-studentcode" placeholder="เช่น STU-84920" maxlength="9" class="w-full p-2.5 bg-white border border-purple-300 rounded-xl font-mono font-bold text-purple-900 focus:outline-none uppercase">
-                        <p class="text-[9px] text-purple-700">รหัสนี้ได้จากหน้าลงทะเบียนของนักเรียนเพื่อเชื่อมโยงข้อมูลติดตาม</p>
-                    </div>
-
-                    <!-- AI Face Inspection for Parent (Optional) -->
-                    <div class="p-3 bg-purple-50/60 border border-purple-200 rounded-2xl space-y-2">
-                        <p class="font-bold text-purple-950 text-xs flex items-center gap-1.5">
-                            <i class="fa-solid fa-camera text-purple-600"></i> อัปโหลดรูปผู้ปกครอง (ไม่บังคับ)
-                        </p>
-                        <div class="flex items-center gap-2">
-                            <input type="file" id="file-par-face" accept="image/*" class="hidden" onchange="simulateAIInspect('par-face', this)">
-                            <button type="button" onclick="document.getElementById('file-par-face').click()" class="py-2 px-4 bg-purple-100 hover:bg-purple-200 text-purple-900 text-xs font-bold rounded-xl transition">
-                                📷 เลือกรูปภาพ
-                            </button>
-                            <span id="status-par-face" class="text-xs text-slate-500 font-semibold">ไม่ได้บังคับ</span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-1">ตั้งรหัสผ่าน 6 หลัก สำหรับเข้าสู่ระบบผู้ปกครอง *</label>
-                        <input type="password" id="par-pass" placeholder="******" maxlength="6" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold focus:outline-none">
-                    </div>
-                </div>
-
-                <button onclick="completeRegistration('parent')" class="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-2xl text-xs shadow-lg transition flex items-center justify-center gap-1.5">
-                    <i class="fa-solid fa-user-group"></i>
-                    <span>🚀 ยืนยันการลงทะเบียน (เข้าสู่หน้าผู้ปกครอง)</span>
-                </button>
             </div>
 
         </div>
 
         <nav class="bg-slate-900 text-slate-400 py-3 text-center text-[10px] font-semibold border-t border-slate-800">
-            School Van Track Registration & AI Verification v4.6
+            School Van Track Registration & Auth v4.6
         </nav>
     </div>
 
-    <!-- SUCCESS MODAL -->
+    <!-- SUCCESS MODAL (POST-REGISTRATION CHOICE) -->
     <div id="success-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
         <div class="bg-white w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl text-center">
             <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl shadow-inner">
@@ -290,19 +336,67 @@
             </div>
             <div>
                 <h3 class="font-black text-slate-900 text-lg" id="success-modal-title">ลงทะเบียนสำเร็จ!</h3>
-                <p class="text-xs text-slate-500 mt-1" id="success-modal-desc">ระบบได้สร้างรหัสประจำตัวและบันทึกข้อมูลของคุณแล้ว</p>
+                <p class="text-xs text-slate-500 mt-1" id="success-modal-desc">ระบบได้บันทึกข้อมูลและออกรหัสประจำตัวให้เรียบร้อยแล้ว</p>
             </div>
             <div class="p-3 bg-slate-50 rounded-2xl border font-mono text-xl font-black text-indigo-700 tracking-wider" id="generated-code-display">
                 DRV-98765
             </div>
-            <button onclick="redirectToDashboard()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-2xl shadow-lg transition">
-                🚀 เข้าสู่ระบบหน้าทำการ (Dashboard)
-            </button>
+
+            <!-- Choice Actions -->
+            <div class="space-y-2 pt-2">
+                <button onclick="redirectToDashboard()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-2xl shadow-lg transition">
+                    🚀 เข้าสู่ระบบหน้าทำการทันที (Dashboard)
+                </button>
+                <button onclick="goToLoginPage()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-2xl transition">
+                    🔑 ไปที่หน้าเข้าสู่ระบบ (Login Page)
+                </button>
+            </div>
         </div>
     </div>
 
     <script>
         let registeredRole = 'driver';
+        let registeredRoleCode = '';
+
+        // LocalStorage Database Handler
+        function getUsersDB() {
+            return JSON.parse(localStorage.getItem('van_track_users') || '{}');
+        }
+
+        function saveUserToDB(phone, userData) {
+            const db = getUsersDB();
+            db[phone] = userData;
+            localStorage.setItem('van_track_users', JSON.stringify(db));
+        }
+
+        // SWITCH BETWEEN REGISTER & LOGIN VIEWS
+        function switchMainView(view) {
+            const regView = document.getElementById('view-register');
+            const loginView = document.getElementById('view-login');
+            const regTab = document.getElementById('mode-tab-register');
+            const loginTab = document.getElementById('mode-tab-login');
+            const roleWrapper = document.getElementById('role-selector-wrapper');
+            const autofillBox = document.getElementById('demo-autofill-box');
+            const headerTitle = document.getElementById('header-title');
+
+            if (view === 'register') {
+                regView.classList.remove('hidden');
+                loginView.classList.add('hidden');
+                roleWrapper.classList.remove('hidden');
+                autofillBox.classList.remove('hidden');
+                regTab.className = "py-2 rounded-lg bg-indigo-600 text-white shadow transition flex items-center justify-center gap-1";
+                loginTab.className = "py-2 rounded-lg text-slate-300 hover:text-white transition flex items-center justify-center gap-1";
+                headerTitle.innerHTML = `<i class="fa-solid fa-id-card"></i> ระบบลงทะเบียน School Van Track`;
+            } else {
+                regView.classList.add('hidden');
+                loginView.classList.remove('hidden');
+                roleWrapper.classList.add('hidden');
+                autofillBox.classList.add('hidden');
+                loginTab.className = "py-2 rounded-lg bg-indigo-600 text-white shadow transition flex items-center justify-center gap-1";
+                regTab.className = "py-2 rounded-lg text-slate-300 hover:text-white transition flex items-center justify-center gap-1";
+                headerTitle.innerHTML = `<i class="fa-solid fa-right-to-bracket"></i> เข้าสู่ระบบ School Van Track`;
+            }
+        }
 
         function switchRegRole(role) {
             ['driver', 'student', 'parent'].forEach(r => {
@@ -389,7 +483,7 @@
             alert("⚡ เติมข้อมูลทดสอบทั้ง 3 บทบาทเรียบร้อยแล้ว!");
         }
 
-        let generatedRoleCode = "";
+        // COMPLETE REGISTRATION & SAVE TO STORAGE
         function completeRegistration(role) {
             registeredRole = role;
             const modal = document.getElementById('success-modal');
@@ -397,35 +491,91 @@
             const desc = document.getElementById('success-modal-desc');
             const codeDisp = document.getElementById('generated-code-display');
 
+            let phone = "", pass = "", name = "";
+
             if (role === 'driver') {
-                const name = document.getElementById('drv-fullname').value;
-                if (!name) { alert("กรุณากรอกชื่อ-นามสกุลคนขับ"); return; }
-                generatedRoleCode = "DRV-98765";
+                name = document.getElementById('drv-fullname').value;
+                phone = document.getElementById('drv-phone').value;
+                pass = document.getElementById('drv-pass').value;
+
+                if (!name || !phone || !pass) { alert("กรุณากรอกข้อมูลสำคัญ (ชื่อ, เบอร์โทร, รหัสผ่าน) ให้ครบถ้วน"); return; }
+                registeredRoleCode = "DRV-98765";
                 title.innerText = "ลงทะเบียนคนขับรถตู้สำเร็จ!";
                 desc.innerText = "ระบบได้ออกรหัสประจำตัวคนขับให้เรียบร้อยแล้ว:";
-                codeDisp.innerText = generatedRoleCode;
+                codeDisp.innerText = registeredRoleCode;
+
             } else if (role === 'student') {
-                const name = document.getElementById('stu-fullname').value;
-                if (!name) { alert("กรุณากรอกชื่อนักเรียน"); return; }
-                generatedRoleCode = "STU-84920";
+                name = document.getElementById('stu-fullname').value;
+                phone = document.getElementById('stu-phone').value;
+                pass = document.getElementById('stu-pass').value;
+
+                if (!name || !phone || !pass) { alert("กรุณากรอกข้อมูลสำคัญ (ชื่อ, เบอร์โทร, รหัสผ่าน) ให้ครบถ้วน"); return; }
+                registeredRoleCode = "STU-84920";
                 title.innerText = "ลงทะเบียนนักเรียนสำเร็จ!";
                 desc.innerText = "นี่คือ Student Code 6 หลัก สำหรับนำไปให้ผู้ปกครองผูกแอป:";
-                codeDisp.innerText = generatedRoleCode;
+                codeDisp.innerText = registeredRoleCode;
+
             } else if (role === 'parent') {
-                const name = document.getElementById('par-fullname').value;
-                if (!name) { alert("กรุณากรอกผู้ปกครอง"); return; }
-                generatedRoleCode = "PAR-11223";
+                name = document.getElementById('par-fullname').value;
+                phone = document.getElementById('par-phone').value;
+                pass = document.getElementById('par-pass').value;
+
+                if (!name || !phone || !pass) { alert("กรุณากรอกข้อมูลสำคัญ (ชื่อ, เบอร์โทร, รหัสผ่าน) ให้ครบถ้วน"); return; }
+                registeredRoleCode = "PAR-11223";
                 title.innerText = "ลงทะเบียนผู้ปกครองสำเร็จ!";
                 desc.innerText = "ระบบได้เชื่อมโยงบัญชีกับบุตรหลานเรียบร้อยแล้ว:";
                 codeDisp.innerText = "เชื่อมโยงสำเร็จ ✅";
             }
 
+            // Save user info to local database
+            saveUserToDB(phone, {
+                role: role,
+                name: name,
+                pass: pass,
+                code: registeredRoleCode
+            });
+
+            // Auto-fill login input for convenience
+            document.getElementById('login-phone').value = phone;
+
             modal.classList.remove('hidden');
             modal.classList.add('flex');
         }
 
+        // LOGIN VERIFICATION FUNCTION
+        function performLogin() {
+            const phone = document.getElementById('login-phone').value.trim();
+            const pass = document.getElementById('login-pass').value.trim();
+
+            if (!phone || !pass) {
+                alert("กรุณากรอกทั้งเบอร์โทรศัพท์และรหัสผ่าน");
+                return;
+            }
+
+            const db = getUsersDB();
+            const user = db[phone];
+
+            if (!user) {
+                alert("ไม่พบบัญชีผู้ใช้เบอร์โทรนี้ในระบบ กรุณาลงทะเบียนก่อนเข้าสู่ระบบ");
+                return;
+            }
+
+            if (user.pass !== pass) {
+                alert("รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
+                return;
+            }
+
+            alert(`🎉 เข้าสู่ระบบสำเร็จ! ต้อนรับคุณ ${user.name}`);
+            location.href = `index.html?role=${user.role}`;
+        }
+
+        function goToLoginPage() {
+            document.getElementById('success-modal').classList.add('hidden');
+            document.getElementById('success-modal').classList.remove('flex');
+            switchMainView('login');
+        }
+
         function redirectToDashboard() {
-            // Redirect to the main application and automatically switch to the registered role view
             location.href = `index.html?role=${registeredRole}`;
         }
     </script>
