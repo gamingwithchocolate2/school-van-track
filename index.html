@@ -335,6 +335,16 @@
                     </div>
                 </div>
 
+<button 
+  onclick="handleLogout()" 
+  class="px-3 py-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5"
+>
+  <span>🚪</span>
+  <span>ออกจากระบบ</span>
+</button>
+                
+
+                
                 <!-- QUICK CHAT SHORTCUTS & ALL REGISTRATIONS -->
                 <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-2xl space-y-2">
                     <p class="text-xs font-bold text-indigo-950 flex items-center gap-1.5">
@@ -1358,6 +1368,24 @@
             }
         }
 
+        function handleLogout() {
+  // Clear active session keys
+  localStorage.removeItem('van_track_current_user');
+  sessionStorage.clear();
+
+  // Redirect back to login page
+  window.location.href = 'login.html';
+}
+
+        document.addEventListener("DOMContentLoaded", function () {
+  const currentUser = localStorage.getItem('van_track_current_user');
+  
+  // If no active session exists, redirect to login page
+  if (!currentUser) {
+    window.location.href = 'login.html';
+    return;
+  }
+});
         // Helper Map Custom Icons
         function createVanIcon() {
             return L.divIcon({
