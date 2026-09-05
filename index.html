@@ -93,71 +93,44 @@
         </div>
     </div>
 
-    <!-- MAIN APP CONTAINER -->
-    <div class="app-container w-full max-w-md bg-slate-100 h-[100dvh] rounded-none sm:rounded-[2.5rem] shadow-2xl flex flex-col justify-between overflow-hidden relative border-0 sm:border border-slate-700/60">
-
-        <!-- ================= PAGE 0: AUTH / LOGIN & REGISTER SCREEN ================= -->
-        <div id="screen-auth" class="flex flex-col h-full flex-1 relative overflow-y-auto custom-scroll bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white p-6 justify-between z-50">
-            <div class="text-center mt-6 space-y-2">
-                <div class="w-16 h-16 rounded-3xl bg-amber-500 text-slate-950 font-black flex items-center justify-center text-3xl mx-auto shadow-lg shadow-amber-500/30">
-                    <i class="fa-solid fa-van-shuttle"></i>
-                </div>
-                <h1 class="text-xl font-extrabold text-amber-400 tracking-wide">School Van Track Pro</h1>
-                <p class="text-xs text-slate-400">ระบบติดตามรถตู้โรงเรียนครบวงจร Real-Time GPS</p>
+    <!-- LOGIN SCREEN -->
+    <div id="screen-login" class="w-full max-w-md bg-white sm:rounded-[2.5rem] shadow-2xl p-6 sm:p-8 flex flex-col justify-center min-h-[100dvh] sm:min-h-0 z-50">
+        <div class="text-center mb-6">
+            <div class="w-16 h-16 bg-amber-500/10 text-amber-500 rounded-3xl flex items-center justify-center mx-auto text-3xl mb-3 shadow-inner">
+                <i class="fa-solid fa-van-shuttle"></i>
             </div>
-
-            <!-- LOGIN / REGISTER FORM CONTAINER -->
-            <div class="bg-slate-800/90 border border-slate-700/80 p-5 rounded-3xl shadow-2xl backdrop-blur-md space-y-4 my-auto">
-                <div class="grid grid-cols-2 bg-slate-900/80 p-1 rounded-2xl border border-slate-700/80 text-xs font-bold">
-                    <button onclick="switchAuthTab('login')" id="auth-tab-login" class="py-2.5 rounded-xl bg-amber-500 text-slate-950 shadow transition">เข้าสู่ระบบ</button>
-                    <button onclick="switchAuthTab('register')" id="auth-tab-register" class="py-2.5 rounded-xl text-slate-400 hover:text-white transition">ลงทะเบียน</button>
-                </div>
-
-                <!-- ROLE SELECTOR BUTTONS -->
-                <div class="space-y-1.5">
-                    <label class="text-[11px] text-slate-400 font-bold block">เลือกสถานะผู้ใช้งาน (Role):</label>
-                    <div class="grid grid-cols-3 gap-1.5 bg-slate-900/50 p-1 rounded-xl border border-slate-700/50 text-[11px] font-bold">
-                        <button type="button" onclick="selectAuthRole('driver')" id="role-btn-driver" class="py-2 rounded-lg bg-amber-400 text-slate-950 shadow transition">🚌 คนขับ</button>
-                        <button type="button" onclick="selectAuthRole('student')" id="role-btn-student" class="py-2 rounded-lg text-slate-400 hover:text-white transition">🎓 นักเรียน</button>
-                        <button type="button" onclick="selectAuthRole('parent')" id="role-btn-parent" class="py-2 rounded-lg text-slate-400 hover:text-white transition">👨‍👩‍👦 ผู้ปกครอง</button>
-                    </div>
-                </div>
-
-                <!-- FORM FIELDS -->
-                <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-3 text-xs">
-                    <div id="field-fullname" class="hidden space-y-1">
-                        <label class="text-slate-300 font-bold block">ชื่อ-นามสกุล:</label>
-                        <input type="text" id="auth-fullname" placeholder="ระบุชื่อ-นามสกุล..." class="w-full p-3 bg-slate-900/80 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-amber-400">
-                    </div>
-
-                    <div class="space-y-1">
-                        <label class="text-slate-300 font-bold block">เบอร์โทรศัพท์ / อีเมล:</label>
-                        <input type="text" id="auth-username" required placeholder="0812345678" class="w-full p-3 bg-slate-900/80 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-amber-400">
-                    </div>
-
-                    <div class="space-y-1">
-                        <label class="text-slate-300 font-bold block">รหัสผ่าน:</label>
-                        <input type="password" id="auth-password" required placeholder="••••••••" class="w-full p-3 bg-slate-900/80 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-amber-400">
-                    </div>
-
-                    <div id="field-van-code" class="space-y-1">
-                        <label class="text-slate-300 font-bold block" id="label-van-code">รหัสประจำรถตู้ (6 หลัก):</label>
-                        <input type="text" id="auth-vancode" placeholder="V-98765" value="V-98765" class="w-full p-3 bg-slate-900/80 border border-slate-700 rounded-xl text-amber-400 font-extrabold uppercase text-center tracking-widest focus:outline-none focus:border-amber-400">
-                    </div>
-
-                    <button type="submit" id="auth-submit-btn" class="w-full py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-extrabold text-sm rounded-2xl shadow-lg transition active:scale-98 mt-2">
-                        เข้าสู่ระบบ Dashboard
-                    </button>
-                </form>
-            </div>
-
-            <div class="text-center text-[10px] text-slate-500 pb-2">
-                © 2026 School Van Track Pro • All Rights Reserved
-            </div>
+            <h2 class="text-xl font-extrabold text-slate-900">เข้าสู่ระบบ School Van Track</h2>
+            <p class="text-xs text-slate-500 mt-1">กรอกข้อมูลเพื่อใช้งานระบบติดตามรถตู้โรงเรียน</p>
         </div>
 
+        <form onsubmit="handleLogin(event)" class="space-y-4">
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">เลือกสถานะผู้ใช้งาน</label>
+                <select id="login-role" class="w-full p-3 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-amber-500">
+                    <option value="driver">🚌 คนขับรถตู้ (Driver)</option>
+                    <option value="student">🎓 นักเรียน (Student)</option>
+                    <option value="parent">👨‍👩‍👦 ผู้ปกครอง (Parent)</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">ชื่อผู้ใช้ / เบอร์โทรศัพท์</label>
+                <input type="text" id="login-username" required placeholder="กรอกชื่อผู้ใช้หรือเบอร์โทร" class="w-full p-3 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-amber-500">
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">รหัสผ่าน</label>
+                <input type="password" id="login-password" required placeholder="••••••••" class="w-full p-3 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-amber-500">
+            </div>
+            <button type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-sm rounded-xl shadow-lg transition active:scale-95">
+                เข้าสู่ระบบ (Login)
+            </button>
+        </form>
+    </div>
+
+    <!-- MAIN APP CONTAINER (DASHBOARD) -->
+    <div id="app-container" class="app-container w-full max-w-md bg-slate-100 h-[100dvh] rounded-none sm:rounded-[2.5rem] shadow-2xl flex-col justify-between overflow-hidden relative border-0 sm:border border-slate-700/60 hidden">
+
         <!-- TOP ROLE SWITCHER & SIMULATION TABS -->
-        <div id="app-top-header" class="hidden bg-slate-900/95 text-slate-300 px-3.5 py-2.5 flex-col gap-1.5 border-b border-slate-800 z-30 shadow-md">
+        <div class="bg-slate-900/95 text-slate-300 px-3.5 py-2.5 flex flex-col gap-1.5 border-b border-slate-800 z-30 shadow-md">
             <div class="flex justify-between items-center text-xs">
                 <span class="font-black text-amber-400 flex items-center gap-1.5 tracking-wide text-xs">
                     <i class="fa-solid fa-van-shuttle text-amber-400"></i> Van Track <span class="bg-amber-400 text-slate-950 text-[9px] px-1.5 py-0.5 rounded-md font-extrabold uppercase">PRO</span>
@@ -182,7 +155,7 @@
         </div>
 
         <!-- ================= PAGE 1: DRIVER DASHBOARD MAIN ================= -->
-        <div id="screen-dashboard" class="flex flex-col h-full flex-1 relative overflow-hidden hidden">
+        <div id="screen-dashboard" class="flex flex-col h-full flex-1 relative overflow-hidden">
             <!-- MAP DISPLAY -->
             <div id="map-container-driver" class="relative w-full flex-1 min-h-[250px] overflow-hidden transition-all duration-300 z-0">
                 <div id="leaflet-map-driver" class="w-full h-full z-0"></div>
@@ -1309,10 +1282,6 @@
 
     <!-- ================= SCRIPT LOGIC ================= -->
     <script>
-        // Auth State Variables
-        let authMode = 'login'; // 'login' or 'register'
-        let selectedAuthRole = 'driver'; // 'driver', 'student', or 'parent'
-
         // State Variables
         let isDrivingActive = false;
         let driverStudentFilter = 'all';
@@ -1384,68 +1353,21 @@
         let noticeAlarmInterval = null;
         let audioContext = null;
 
-        // AUTH & LOGIN LOGIC
-        function switchAuthTab(mode) {
-            authMode = mode;
-            const loginBtn = document.getElementById('auth-tab-login');
-            const regBtn = document.getElementById('auth-tab-register');
-            const fullnameField = document.getElementById('field-fullname');
-            const submitBtn = document.getElementById('auth-submit-btn');
-
-            if (mode === 'login') {
-                loginBtn.className = "py-2.5 rounded-xl bg-amber-500 text-slate-950 shadow transition";
-                regBtn.className = "py-2.5 rounded-xl text-slate-400 hover:text-white transition";
-                fullnameField.classList.add('hidden');
-                submitBtn.innerText = "เข้าสู่ระบบ Dashboard";
-            } else {
-                regBtn.className = "py-2.5 rounded-xl bg-amber-500 text-slate-950 shadow transition";
-                loginBtn.className = "py-2.5 rounded-xl text-slate-400 hover:text-white transition";
-                fullnameField.classList.remove('hidden');
-                submitBtn.innerText = "ลงทะเบียน และเข้าใช้งาน";
-            }
-        }
-
-        function selectAuthRole(role) {
-            selectedAuthRole = role;
-            ['driver', 'student', 'parent'].forEach(r => {
-                const btn = document.getElementById(`role-btn-${r}`);
-                if (r === role) {
-                    btn.className = "py-2 rounded-lg bg-amber-400 text-slate-950 shadow transition";
-                } else {
-                    btn.className = "py-2 rounded-lg text-slate-400 hover:text-white transition";
-                }
-            });
-
-            const vanCodeField = document.getElementById('field-van-code');
-            if (role === 'driver') {
-                vanCodeField.classList.remove('hidden');
-            } else {
-                vanCodeField.classList.add('hidden');
-            }
-        }
-
-        function handleAuthSubmit(event) {
+        // LOGIN HANDLER
+        function handleLogin(event) {
             event.preventDefault();
-            const username = document.getElementById('auth-username').value.trim();
-            const fullname = document.getElementById('auth-fullname').value.trim();
+            const role = document.getElementById('login-role').value;
+            
+            // Hide login screen and show app container
+            document.getElementById('screen-login').classList.add('hidden');
+            const appContainer = document.getElementById('app-container');
+            appContainer.classList.remove('hidden');
+            appContainer.classList.add('flex');
 
-            if (authMode === 'register' && fullname) {
-                profileData[selectedAuthRole].name = fullname;
-            }
-
-            if (username) {
-                profileData[selectedAuthRole].phone = username;
-            }
-
-            showToast("เข้าสู่ระบบสำเร็จ!", `ยินดีต้อนรับเข้าสู่ระบบ Van Track Pro`, "fa-solid fa-right-to-bracket", "bg-emerald-500/20 text-emerald-400");
-
-            // Hide Auth Screen and Show Main App Elements
-            document.getElementById('screen-auth').classList.add('hidden');
-            document.getElementById('app-top-header').classList.remove('hidden');
-            document.getElementById('app-top-header').classList.add('flex');
-
-            // Switch directly to the selected role dashboard
-            switchRoleView(selectedAuthRole);
+            // Initialize Maps and switch to selected view
+            initLeafletMaps();
+            switchRoleView(role);
+            showToast('เข้าสู่ระบบสำเร็จ', 'ยินดีต้อนรับเข้าสู่ระบบติดตามรถตู้โรงเรียน', 'fa-solid fa-right-to-bracket', 'bg-emerald-500/20 text-emerald-400');
         }
 
         // Custom Toast Helper
@@ -1454,7 +1376,7 @@
             document.getElementById('toast-title').innerText = title;
             document.getElementById('toast-msg').innerText = message;
             const iconContainer = document.getElementById('toast-icon');
-            iconContainer.className = `w-8 h-8 rounded-xl flex items-center justify-center text-sm font-bold flex-shrink-0 ${bgIcon}`;
+            iconContainer.className = `w-8 h-8 rounded-xl ${bgIcon} flex items-center justify-center text-sm font-bold flex-shrink-0`;
             iconContainer.innerHTML = `<i class="${iconClass}"></i>`;
 
             toast.classList.remove('opacity-0', '-translate-y-5', 'pointer-events-none');
@@ -1463,559 +1385,690 @@
             setTimeout(() => {
                 toast.classList.remove('opacity-100', 'translate-y-0');
                 toast.classList.add('opacity-0', '-translate-y-5', 'pointer-events-none');
-            }, 3500);
+            }, 3200);
         }
 
-        // Initialize Leaflet Maps
+        // Play Beep Sound (1 sec sound every 10 sec)
+        function playBeepSound() {
+            try {
+                if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioContext.state === 'suspended') audioContext.resume();
+                
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = 880; 
+                gain.gain.value = 0.3;
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+                osc.start();
+                osc.stop(audioContext.currentTime + 1.0); // 1.0 second sound
+            } catch (e) {
+                console.log("Audio play blocked by browser policy");
+            }
+        }
+
+        // Helper Map Custom Icons
+        function createVanIcon() {
+            return L.divIcon({
+                className: 'leaflet-div-icon',
+                html: `
+                    <div class="van-marker-pulse w-9 h-9 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center text-base font-black shadow-2xl border-2 border-white">
+                        <i class="fa-solid fa-van-shuttle"></i>
+                    </div>
+                `,
+                iconSize: [36, 36],
+                iconAnchor: [18, 18]
+            });
+        }
+
+        function createSchoolIcon(name) {
+            return L.divIcon({
+                className: 'leaflet-div-icon',
+                html: `
+                    <div class="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-xs shadow-lg border-2 border-white" title="${name}">
+                        <i class="fa-solid fa-school"></i>
+                    </div>
+                `,
+                iconSize: [32, 32],
+                iconAnchor: [16, 16]
+            });
+        }
+
+        function createStudentIcon(name) {
+            return L.divIcon({
+                className: 'leaflet-div-icon',
+                html: `
+                    <div class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] shadow-md border-2 border-white" title="${name}">
+                        <i class="fa-solid fa-child"></i>
+                    </div>
+                `,
+                iconSize: [28, 28],
+                iconAnchor: [14, 14]
+            });
+        }
+
+        // ================= MAP SETUP (LEAFLET) =================
         function initLeafletMaps() {
-            const defaultPos = [13.7563, 100.5018];
+            const startPos = busPathPoints[0];
 
+            // 1. Driver Map Setup
             if (!mapDriver && document.getElementById('leaflet-map-driver')) {
-                mapDriver = L.map('leaflet-map-driver', { zoomControl: false }).setView(defaultPos, 14);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapDriver);
-                
-                const vanIconDriver = L.divIcon({
-                    className: 'leaflet-div-icon',
-                    html: `<div class="w-10 h-10 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center border-2 border-white shadow-2xl text-lg font-black van-marker-pulse"><i class="fa-solid fa-van-shuttle"></i></div>`,
-                    iconSize: [40, 40], iconAnchor: [20, 20]
+                mapDriver = L.map('leaflet-map-driver', { zoomControl: false }).setView(startPos, 14);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(mapDriver);
+                L.polyline(busPathPoints, { color: '#6366f1', weight: 4, dashArray: '6, 8' }).addTo(mapDriver);
+                vanMarkerDriver = L.marker(startPos, { icon: createVanIcon() }).addTo(mapDriver).bindPopup("<b>รถตู้ V-98765</b><br>คนขับ: ลุงศักดิ์");
+
+                // Plot Student Houses
+                driverStudentsList.forEach(st => {
+                    L.marker([st.lat, st.lng], { icon: createStudentIcon(st.name) }).addTo(mapDriver).bindPopup(`<b>${st.name}</b><br>${st.address}`);
                 });
-                vanMarkerDriver = L.marker(defaultPos, { icon: vanIconDriver }).addTo(mapDriver);
+
+                // Plot Schools
+                L.marker([13.7680, 100.5450], { icon: createSchoolIcon("โรงเรียนสาธิตพัฒนา") }).addTo(mapDriver);
+                L.marker([13.7630, 100.5350], { icon: createSchoolIcon("โรงเรียนนานาชาติร่วมฤดี") }).addTo(mapDriver);
             }
 
+            // 2. Student Map Setup
             if (!mapStudent && document.getElementById('leaflet-map-student')) {
-                mapStudent = L.map('leaflet-map-student', { zoomControl: false }).setView(defaultPos, 14);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapStudent);
-                
-                const vanIconStudent = L.divIcon({
-                    className: 'leaflet-div-icon',
-                    html: `<div class="w-10 h-10 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center border-2 border-white shadow-2xl text-lg font-black van-marker-pulse"><i class="fa-solid fa-van-shuttle"></i></div>`,
-                    iconSize: [40, 40], iconAnchor: [20, 20]
-                });
-                vanMarkerStudent = L.marker(defaultPos, { icon: vanIconStudent }).addTo(mapStudent);
+                mapStudent = L.map('leaflet-map-student', { zoomControl: false }).setView(startPos, 14);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(mapStudent);
+                L.polyline(busPathPoints, { color: '#3b82f6', weight: 4 }).addTo(mapStudent);
+                vanMarkerStudent = L.marker(startPos, { icon: createVanIcon() }).addTo(mapStudent);
+                L.marker([13.7580, 100.5100], { icon: createStudentIcon("บ้านของฉัน") }).addTo(mapStudent);
+                L.marker([13.7680, 100.5450], { icon: createSchoolIcon("โรงเรียนสาธิตพัฒนา") }).addTo(mapStudent);
             }
 
+            // 3. Parent Map Setup
             if (!mapParent && document.getElementById('leaflet-map-parent')) {
-                mapParent = L.map('leaflet-map-parent', { zoomControl: false }).setView(defaultPos, 14);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapParent);
-                
-                const vanIconParent = L.divIcon({
-                    className: 'leaflet-div-icon',
-                    html: `<div class="w-10 h-10 rounded-2xl bg-purple-600 text-white flex items-center justify-center border-2 border-white shadow-2xl text-lg font-black van-marker-pulse"><i class="fa-solid fa-van-shuttle"></i></div>`,
-                    iconSize: [40, 40], iconAnchor: [20, 20]
-                });
-                vanMarkerParent = L.marker(defaultPos, { icon: vanIconParent }).addTo(mapParent);
-
-                const studentHomeIcon = L.divIcon({
-                    className: 'leaflet-div-icon',
-                    html: `<div class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center border-2 border-white shadow-lg text-xs font-bold"><i class="fa-solid fa-house-user"></i></div>`,
-                    iconSize: [32, 32], iconAnchor: [16, 16]
-                });
-                parentStudentMarker = L.marker([13.7580, 100.5100], { icon: studentHomeIcon }).addTo(mapParent);
-
-                const schoolIcon = L.divIcon({
-                    className: 'leaflet-div-icon',
-                    html: `<div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center border-2 border-white shadow-lg text-xs font-bold"><i class="fa-solid fa-school"></i></div>`,
-                    iconSize: [32, 32], iconAnchor: [16, 16]
-                });
-                parentSchoolMarker = L.marker([13.7680, 100.5450], { icon: schoolIcon }).addTo(mapParent);
+                mapParent = L.map('leaflet-map-parent', { zoomControl: false }).setView(startPos, 14);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(mapParent);
+                L.polyline(busPathPoints, { color: '#9333ea', weight: 4 }).addTo(mapParent);
+                vanMarkerParent = L.marker(startPos, { icon: createVanIcon() }).addTo(mapParent);
+                parentStudentMarker = L.marker([13.7580, 100.5100], { icon: createStudentIcon("น้องสมชาย") }).addTo(mapParent);
+                parentSchoolMarker = L.marker([13.7680, 100.5450], { icon: createSchoolIcon("โรงเรียนสาธิตพัฒนา") }).addTo(mapParent);
             }
         }
 
-        // Switch App Role Screens
+        // ================= ROLE VIEW SWITCHING =================
         function switchRoleView(role) {
             activeRole = role;
-            
-            document.getElementById('screen-dashboard').classList.add('hidden');
-            document.getElementById('screen-student-view').classList.add('hidden');
-            document.getElementById('screen-parent-view').classList.add('hidden');
-            document.getElementById('screen-chat').classList.add('hidden');
+            ['dashboard', 'student-view', 'parent-view', 'chat'].forEach(id => {
+                const el = document.getElementById(`screen-${id}`);
+                if (el) el.classList.add('hidden');
+            });
 
-            const tabDriver = document.getElementById('tab-view-driver');
-            const tabStudent = document.getElementById('tab-view-student');
-            const tabParent = document.getElementById('tab-view-parent');
-
-            tabDriver.className = "px-2.5 py-1 rounded-lg font-bold hover:bg-slate-700/50 text-slate-300 transition-all duration-200 text-[11px]";
-            tabStudent.className = "px-2.5 py-1 rounded-lg font-bold hover:bg-slate-700/50 text-slate-300 transition-all duration-200 text-[11px]";
-            tabParent.className = "px-2.5 py-1 rounded-lg font-bold hover:bg-slate-700/50 text-slate-300 transition-all duration-200 text-[11px]";
-
-            initLeafletMaps();
+            const tabs = ['driver', 'student', 'parent'];
+            tabs.forEach(r => {
+                const btn = document.getElementById(`tab-view-${r}`);
+                if (btn) {
+                    btn.className = (r === role) 
+                        ? 'px-2.5 py-1 rounded-lg font-bold bg-amber-400 text-slate-950 shadow transition-all duration-200 text-[11px]'
+                        : 'px-2.5 py-1 rounded-lg font-bold hover:bg-slate-700/50 text-slate-300 transition-all duration-200 text-[11px]';
+                }
+            });
 
             if (role === 'driver') {
                 document.getElementById('screen-dashboard').classList.remove('hidden');
-                tabDriver.className = "px-2.5 py-1 rounded-lg font-bold bg-amber-400 text-slate-950 shadow transition-all duration-200 text-[11px]";
-                setTimeout(() => mapDriver && mapDriver.invalidateSize(), 200);
+                setTimeout(() => { if (mapDriver) { mapDriver.invalidateSize(); mapDriver.setView(busPathPoints[currentBusPointIdx], 14); } }, 200);
             } else if (role === 'student') {
                 document.getElementById('screen-student-view').classList.remove('hidden');
-                tabStudent.className = "px-2.5 py-1 rounded-lg font-bold bg-blue-600 text-white shadow transition-all duration-200 text-[11px]";
-                setTimeout(() => mapStudent && mapStudent.invalidateSize(), 200);
+                setTimeout(() => { if (mapStudent) { mapStudent.invalidateSize(); mapStudent.setView(busPathPoints[currentBusPointIdx], 14); } }, 200);
             } else if (role === 'parent') {
                 document.getElementById('screen-parent-view').classList.remove('hidden');
-                tabParent.className = "px-2.5 py-1 rounded-lg font-bold bg-purple-600 text-white shadow transition-all duration-200 text-[11px]";
-                renderParentChildButtons();
-                renderParentTripSteps();
-                setTimeout(() => mapParent && mapParent.invalidateSize(), 200);
+                setTimeout(() => { if (mapParent) { mapParent.invalidateSize(); mapParent.setView(busPathPoints[currentBusPointIdx], 14); } }, 200);
             }
 
-            updateUIFromState();
+            renderDriverStudentList();
+            renderDriverSchoolList();
+            renderDriverPaymentList();
+            renderParentChildButtons();
+            renderParentTripSteps();
         }
 
-        // Toggle Expand Bottom Sheet
+        // ================= BOTTOM SHEET TOGGLE =================
         function toggleBottomSheet(role) {
             sheetState[role] = !sheetState[role];
             const sheet = document.getElementById(`bottom-sheet-${role}`);
-            const expandBtn = document.getElementById(`map-expand-btn-${role}`);
-            const icon = document.getElementById(`expand-icon-${role}`);
-            const text = document.getElementById(`expand-text-${role}`);
+            const expandIcon = document.getElementById(`expand-icon-${role}`);
+            const expandText = document.getElementById(`expand-text-${role}`);
             const handleText = document.getElementById(`sheet-handle-text-${role}`);
 
             if (sheetState[role]) {
                 sheet.classList.add('sheet-minimized');
-                if (icon) icon.className = "fa-solid fa-down-left-and-up-right-to-center text-[10px]";
-                if (text) text.innerText = "แสดงเมนู";
-                if (handleText) handleText.innerHTML = `<i class="fa-solid fa-chevron-up mr-0.5"></i> กดเพื่อขยายเมนูกลับขึ้นมา`;
+                if (expandIcon) expandIcon.className = 'fa-solid fa-down-left-and-up-right-to-center text-[10px]';
+                if (expandText) expandText.innerText = 'ย่อแผนที่';
+                if (handleText) handleText.innerHTML = '<i class="fa-solid fa-chevron-up mr-0.5"></i> กดเพื่อขยายแผงควบคุมกลับขึ้นมา';
             } else {
                 sheet.classList.remove('sheet-minimized');
-                if (icon) icon.className = "fa-solid fa-up-right-and-down-left-from-center text-[10px]";
-                if (text) text.innerText = "ขยายแผนที่";
-                if (handleText) handleText.innerHTML = `<i class="fa-solid fa-chevron-down mr-0.5"></i> กดเพื่อพับแถบลง / ขยายดูแผนที่เต็มจอ`;
+                if (expandIcon) expandIcon.className = 'fa-solid fa-up-right-and-down-left-from-center text-[10px]';
+                if (expandText) expandText.innerText = 'ขยายแผนที่';
+                if (handleText) handleText.innerHTML = '<i class="fa-solid fa-chevron-down mr-0.5"></i> กดเพื่อพับแถบลง / ขยายดูแผนที่เต็มจอ';
             }
 
             setTimeout(() => {
                 if (mapDriver) mapDriver.invalidateSize();
                 if (mapStudent) mapStudent.invalidateSize();
                 if (mapParent) mapParent.invalidateSize();
-            }, 300);
-        }
-
-        // Toggle Expand Feature Panels
-        function togglePanel(panelId) {
-            const panel = document.getElementById(panelId);
-            if (!panel) return;
-            const isOpen = panel.classList.contains('open');
-            
-            document.querySelectorAll('.expand-panel').forEach(p => p.classList.remove('open'));
-            
-            if (!isOpen) {
-                panel.classList.add('open');
-            }
-        }
-
-        // Drive State Controller (Start / Stop Trip)
-        function toggleDriveState() {
-            isDrivingActive = !isDrivingActive;
-            const btn = document.getElementById('main-drive-btn');
-            const icon = document.getElementById('main-drive-icon');
-            const text = document.getElementById('main-drive-text');
-
-            const btnStudents = document.getElementById('btn-box-students');
-            const btnSchool = document.getElementById('btn-box-school');
-            const btnNotice = document.getElementById('btn-box-notice');
-
-            if (isDrivingActive) {
-                btn.className = "w-full py-3.5 px-6 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 border border-rose-500 active:scale-[0.99] animate-pulse";
-                icon.className = "fa-solid fa-stop text-white";
-                text.innerText = "🛑 กดเพื่อสิ้นสุดการวิ่งรถ (End Trip)";
-
-                [btnStudents, btnSchool, btnNotice].forEach(b => {
-                    if(b) {
-                        b.disabled = false;
-                        b.classList.remove('opacity-60', 'cursor-not-allowed');
-                        b.classList.add('hover:bg-slate-200', 'cursor-pointer');
-                    }
-                });
-
-                startBusSimulationMovement();
-                showToast("เริ่มการวิ่งรถแล้ว!", "ระบบเปิดเซนเซอร์ติดตาม Real-Time GPS สำหรับนักเรียนและผู้ปกครองแล้ว", "fa-solid fa-van-shuttle", "bg-amber-500/20 text-amber-400");
-            } else {
-                btn.className = "w-full py-3.5 px-6 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 border border-slate-700 active:scale-[0.99]";
-                icon.className = "fa-solid fa-play text-amber-400";
-                text.innerText = "กดเพื่อเริ่มวิ่งรถ (Start Trip)";
-
-                [btnStudents, btnSchool, btnNotice].forEach(b => {
-                    if(b) {
-                        b.disabled = true;
-                        b.classList.add('opacity-60', 'cursor-not-allowed');
-                        b.classList.remove('hover:bg-slate-200', 'cursor-pointer');
-                    }
-                });
-
-                document.querySelectorAll('.expand-panel').forEach(p => p.classList.remove('open'));
-                stopBusSimulationMovement();
-                showToast("สิ้นสุดการวิ่งรถ", "บันทึกการเดินทางรอบนี้เข้าสู่ระบบประวัติการรับส่งเรียบร้อยแล้ว", "fa-solid fa-flag-checkered", "bg-indigo-500/20 text-indigo-400");
-            }
-
-            updateUIFromState();
-        }
-
-        // Bus Movement Simulation Logic
-        function startBusSimulationMovement() {
-            if (busMoveInterval) clearInterval(busMoveInterval);
-            busMoveInterval = setInterval(() => {
-                currentBusPointIdx = (currentBusPointIdx + 1) % busPathPoints.length;
-                const pos = busPathPoints[currentBusPointIdx];
-
-                if (vanMarkerDriver) vanMarkerDriver.setLatLng(pos);
-                if (vanMarkerStudent) vanMarkerStudent.setLatLng(pos);
-                if (vanMarkerParent) vanMarkerParent.setLatLng(pos);
-
-                if (isDrivingActive) {
-                    if (currentBusPointIdx === 1) {
-                        parentMorningStep = 2;
-                    } else if (currentBusPointIdx === 3) {
-                        parentMorningStep = 3;
-                    } else if (currentBusPointIdx === 4) {
-                        parentMorningStep = 4;
-                    }
-                    if (activeRole === 'parent') renderParentTripSteps();
-                }
-            }, 4000);
-        }
-
-        function stopBusSimulationMovement() {
-            if (busMoveInterval) clearInterval(busMoveInterval);
+            }, 350);
         }
 
         function recenterMap() {
-            const pos = busPathPoints[currentBusPointIdx];
-            if (activeRole === 'driver' && mapDriver) mapDriver.panTo(pos);
-            if (activeRole === 'student' && mapStudent) mapStudent.panTo(pos);
-            if (activeRole === 'parent' && mapParent) mapParent.panTo(pos);
-            showToast("ปรับโฟกัสตำแหน่ง", "ย้ายจุดกึ่งกลางแผนที่ไปยังตำแหน่งรถตู้ปัจจุบันแล้ว", "fa-solid fa-crosshairs", "bg-amber-500/20 text-amber-400");
+            const curPos = busPathPoints[currentBusPointIdx];
+            if (activeRole === 'driver' && mapDriver) mapDriver.setView(curPos, 15);
+            if (activeRole === 'student' && mapStudent) mapStudent.setView(curPos, 15);
+            if (activeRole === 'parent' && mapParent) mapParent.setView(curPos, 15);
+            showToast('ปรับมุมมองแผนที่', 'ซูมไปที่ตำแหน่งปัจจุบันของรถตู้ V-98765 ทันที', 'fa-solid fa-location-crosshairs');
         }
 
-        // Update All Dynamic UI Components
-        function updateUIFromState() {
-            // Update Status Badge Displays
+        // ================= DRIVER SIMULATION ENGINE =================
+        function toggleDriveState() {
+            isDrivingActive = !isDrivingActive;
+            const driveBtn = document.getElementById('main-drive-btn');
+            const driveIcon = document.getElementById('main-drive-icon');
+            const driveText = document.getElementById('main-drive-text');
+
             const statusDot = document.getElementById('map-status-dot');
             const statusText = document.getElementById('map-status-text');
-            const studentVanDot = document.getElementById('student-van-dot');
-            const studentVanBadge = document.getElementById('student-van-text-badge');
-            const parentVanDot = document.getElementById('parent-van-dot');
-            const parentVanBadge = document.getElementById('parent-van-text-badge');
 
             const bannerText = document.getElementById('banner-van-status-text');
             const bannerBadge = document.getElementById('banner-van-badge');
+            const studentVanDot = document.getElementById('student-van-dot');
+            const studentVanBadge = document.getElementById('student-van-text-badge');
+
+            const parentVanDot = document.getElementById('parent-van-dot');
+            const parentVanBadge = document.getElementById('parent-van-text-badge');
+
+            const featureBtns = ['btn-box-students', 'btn-box-school', 'btn-box-notice'];
 
             if (isDrivingActive) {
-                if(statusDot) statusDot.className = "w-3 h-3 rounded-full bg-emerald-500 animate-ping shadow-sm";
-                if(statusText) statusText.innerText = "กำลังวิ่ง";
-                if(studentVanDot) studentVanDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block mr-1 animate-pulse";
-                if(studentVanBadge) { studentVanBadge.innerText = "กำลังเดินทาง"; studentVanBadge.className = "text-[10px] font-bold text-emerald-400"; }
-                if(parentVanDot) parentVanDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block mr-1 animate-pulse";
-                if(parentVanBadge) { parentVanBadge.innerText = "กำลังเดินทาง"; parentVanBadge.className = "text-[10px] font-bold text-emerald-400"; }
+                driveBtn.className = "w-full py-3.5 px-6 rounded-2xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-sm shadow-xl transition-all flex items-center justify-center gap-2 active:scale-[0.99] animate-pulse";
+                driveIcon.className = "fa-solid fa-pause text-slate-950";
+                driveText.innerText = "กำลังวิ่งรถอยู่... (กดเพื่อหยุดชั่วคราว)";
 
-                if(bannerText) bannerText.innerText = "🚌 รถตู้กำลังเดินทางในเส้นทางรับ-ส่ง";
-                if(bannerBadge) { bannerBadge.innerText = "กำลังวิ่ง"; bannerBadge.className = "text-[9px] bg-emerald-500 text-white font-bold px-2 py-1 rounded-lg shadow animate-pulse"; }
+                statusDot.className = "w-3 h-3 rounded-full bg-emerald-500 animate-ping shadow-sm";
+                statusText.innerText = "กำลังวิ่ง";
+                statusText.className = "text-[10px] font-bold text-emerald-400";
+
+                bannerText.innerText = "🟢 รถตู้ลุงศักดิ์กำลังออกเดินทางวิ่งรับ-ส่ง";
+                bannerBadge.innerText = "กำลังวิ่ง";
+                bannerBadge.className = "text-[9px] bg-emerald-500 text-white font-bold px-2 py-1 rounded-lg animate-pulse";
+
+                studentVanDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block mr-1 animate-ping";
+                studentVanBadge.innerText = "กำลังวิ่ง";
+                studentVanBadge.className = "text-[10px] font-bold text-emerald-400";
+
+                parentVanDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block mr-1 animate-ping";
+                parentVanBadge.innerText = "กำลังวิ่ง";
+                parentVanBadge.className = "text-[10px] font-bold text-emerald-400";
+
+                featureBtns.forEach(id => {
+                    const btn = document.getElementById(id);
+                    if (btn) {
+                        btn.disabled = false;
+                        btn.classList.remove('opacity-60', 'cursor-not-allowed');
+                        btn.classList.add('hover:bg-slate-200', 'cursor-pointer');
+                    }
+                });
+
+                document.getElementById('student-summary-text').innerText = "คลิกเปิดดูรายชื่อ";
+                document.getElementById('school-summary-text').innerText = "2 โรงเรียนปลายทาง";
+                document.getElementById('notice-summary-text').innerText = "1 คำขอรออนุมัติ";
+
+                showToast("เริ่มออกเดินทางแล้ว!", "ระบบเปิดเซ็นเซอร์ GPS และเปิดแผงควบคุมครบวงจรเรียบร้อย", "fa-solid fa-circle-play", "bg-emerald-500/20 text-emerald-400");
+
+                // Start Vehicle Automatic Movement Simulation
+                if (!busMoveInterval) {
+                    busMoveInterval = setInterval(() => {
+                        currentBusPointIdx = (currentBusPointIdx + 1) % busPathPoints.length;
+                        const nextPos = busPathPoints[currentBusPointIdx];
+                        if (vanMarkerDriver) vanMarkerDriver.setLatLng(nextPos);
+                        if (vanMarkerStudent) vanMarkerStudent.setLatLng(nextPos);
+                        if (vanMarkerParent) vanMarkerParent.setLatLng(nextPos);
+
+                        // Trigger step auto update for parent view simulation
+                        if (currentBusPointIdx === 1) parentMorningStep = 2;
+                        else if (currentBusPointIdx === 3) parentMorningStep = 3;
+                        else if (currentBusPointIdx === 4) parentMorningStep = 4;
+                        renderParentTripSteps();
+
+                    }, 4000);
+                }
+
             } else {
-                if(statusDot) statusDot.className = "w-3 h-3 rounded-full bg-slate-400 shadow-sm";
-                if(statusText) statusText.innerText = "จอด";
-                if(studentVanDot) studentVanDot.className = "w-2.5 h-2.5 rounded-full bg-slate-400 inline-block mr-1";
-                if(studentVanBadge) { studentVanBadge.innerText = "จอดอยู่"; studentVanBadge.className = "text-[10px] font-bold text-slate-300"; }
-                if(parentVanDot) parentVanDot.className = "w-2.5 h-2.5 rounded-full bg-slate-400 inline-block mr-1";
-                if(parentVanBadge) { parentVanBadge.innerText = "จอดอยู่"; parentVanBadge.className = "text-[10px] font-bold text-slate-300"; }
+                driveBtn.className = "w-full py-3.5 px-6 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 border border-slate-700 active:scale-[0.99]";
+                driveIcon.className = "fa-solid fa-play text-amber-400";
+                driveText.innerText = "กดเพื่อเริ่มวิ่งรถ (Start Trip)";
 
-                if(bannerText) bannerText.innerText = "🛑 รถตู้ยังไม่เริ่มวิ่ง (ประจำจุดจอด)";
-                if(bannerBadge) { bannerBadge.innerText = "รอเริ่มวิ่ง"; bannerBadge.className = "text-[9px] bg-slate-700 text-slate-300 font-bold px-2 py-1 rounded-lg"; }
-            }
+                statusDot.className = "w-3 h-3 rounded-full bg-slate-400 shadow-sm";
+                statusText.innerText = "จอด";
+                statusText.className = "text-[10px] font-bold text-slate-300";
 
-            renderDriverStudentList();
-            renderSchoolList();
-            renderDriverPaymentList();
-            renderStudentSelfUI();
-        }
+                bannerText.innerText = "🛑 รถตู้ยังไม่เริ่มวิ่ง (ประจำจุดจอด)";
+                bannerBadge.innerText = "รอเริ่มวิ่ง";
+                bannerBadge.className = "text-[9px] bg-slate-700 text-slate-300 font-bold px-2 py-1 rounded-lg";
 
-        // Render Driver's Students List Panel
-        function renderDriverStudentList() {
-            const container = document.getElementById('driver-student-dynamic-list');
-            if (!container) return;
+                studentVanDot.className = "w-2.5 h-2.5 rounded-full bg-slate-400 inline-block mr-1";
+                studentVanBadge.innerText = "จอดอยู่";
+                studentVanBadge.className = "text-[10px] font-bold text-slate-300";
 
-            let filtered = driverStudentsList.filter(s => {
-                if (driverStudentFilter === 'boarded') return s.boarded;
-                if (driverStudentFilter === 'pending') return !s.boarded && s.isMorningGo;
-                if (driverStudentFilter === 'absent') return !s.isMorningGo;
-                return true;
-            });
+                parentVanDot.className = "w-2.5 h-2.5 rounded-full bg-slate-400 inline-block mr-1";
+                parentVanBadge.innerText = "จอดอยู่";
+                parentVanBadge.className = "text-[10px] font-bold text-slate-300";
 
-            const boardedCount = driverStudentsList.filter(s => s.boarded).length;
-            const totalCount = driverStudentsList.length;
+                if (busMoveInterval) {
+                    clearInterval(busMoveInterval);
+                    busMoveInterval = null;
+                }
 
-            document.getElementById('student-summary-text').innerText = isDrivingActive ? `ขึ้นแล้ว ${boardedCount}/${totalCount} คน` : "รอเริ่มวิ่ง...";
-            document.getElementById('driver-trip-summary-text').innerText = `นักเรียนทั้งหมด ${totalCount} คน • ขึ้นรถแล้ว ${boardedCount} คน`;
-
-            let html = '';
-            filtered.forEach(s => {
-                const statusBadge = s.boarded ? 
-                    `<span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded-md">ขึ้นรถแล้ว</span>` :
-                    (!s.isMorningGo ? `<span class="px-2 py-0.5 bg-rose-100 text-rose-800 text-[10px] font-bold rounded-md">วันนี้ลา</span>` :
-                    `<span class="px-2 py-0.5 bg-amber-100 text-amber-900 text-[10px] font-bold rounded-md">ยังไม่ขึ้น</span>`);
-
-                html += `
-                    <div class="p-3 bg-white rounded-xl border border-blue-100 flex justify-between items-center shadow-sm">
-                        <div class="space-y-0.5">
-                            <p class="font-bold text-slate-900">${s.name} <span class="text-slate-500 font-normal">(${s.nickname})</span></p>
-                            <p class="text-[10px] text-slate-500"><i class="fa-solid fa-school text-indigo-500"></i> ${s.school}</p>
-                            <p class="text-[10px] text-slate-500"><i class="fa-solid fa-location-dot text-rose-500"></i> ${s.address}</p>
-                        </div>
-                        <div class="flex flex-col items-end gap-1.5">
-                            ${statusBadge}
-                            <button onclick="toggleStudentBoarded(${s.id})" class="text-[10px] px-2.5 py-1 rounded-lg font-bold ${s.boarded ? 'bg-slate-200 text-slate-700' : 'bg-emerald-600 text-white shadow'} transition">
-                                ${s.boarded ? 'ยกเลิก' : 'เช็กขึ้นรถ'}
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-        }
-
-        function toggleStudentBoarded(studentId) {
-            const student = driverStudentsList.find(s => s.id === studentId);
-            if (student) {
-                student.boarded = !student.boarded;
-                showToast("อัปเดตสถานะ", `เปลี่ยนสถานะ ${student.name} เป็น ${student.boarded ? 'ขึ้นรถแล้ว' : 'ยังไม่ขึ้นรถ'}`, "fa-solid fa-user-check", "bg-emerald-500/20 text-emerald-400");
-                renderDriverStudentList();
+                showToast("หยุดพักการวิ่งรถ", "บันทึกสถานะจุดจอดเรียบร้อยแล้ว", "fa-solid fa-circle-pause", "bg-amber-500/20 text-amber-400");
             }
         }
 
+        function togglePanel(panelId) {
+            const panel = document.getElementById(panelId);
+            if (panel) panel.classList.toggle('open');
+        }
+
+        // ================= DRIVER RENDERERS =================
         function filterDriverStudents(filter) {
             driverStudentFilter = filter;
             ['all', 'boarded', 'pending', 'absent'].forEach(f => {
                 const btn = document.getElementById(`driver-filter-${f}`);
-                if (f === filter) {
-                    btn.className = "py-1.5 rounded-lg bg-indigo-600 text-white shadow transition";
-                } else {
-                    btn.className = "py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition";
+                if (btn) {
+                    btn.className = (f === filter) 
+                        ? 'py-1.5 rounded-lg bg-indigo-600 text-white shadow transition'
+                        : 'py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition';
                 }
             });
             renderDriverStudentList();
         }
 
-        // Render School Route List
-        function renderSchoolList() {
-            const container = document.getElementById('school-list-container');
+        function renderDriverStudentList() {
+            const container = document.getElementById('driver-student-dynamic-list');
             if (!container) return;
 
-            document.getElementById('school-summary-text').innerText = isDrivingActive ? `${schoolRouteOrder.length} โรงเรียน` : "รอเริ่มวิ่ง...";
-            document.getElementById('active-school-count-label').innerText = schoolRouteOrder.length;
+            let filtered = driverStudentsList.filter(st => {
+                if (driverStudentFilter === 'boarded') return st.isMorningGo && st.boarded;
+                if (driverStudentFilter === 'pending') return st.isMorningGo && !st.boarded;
+                if (driverStudentFilter === 'absent') return !st.isMorningGo;
+                return true;
+            });
 
-            let html = '';
-            schoolRouteOrder.forEach((schoolName, idx) => {
-                const studentsAtSchool = driverStudentsList.filter(s => s.school === schoolName);
+            const activeStudents = driverStudentsList.filter(s => s.isMorningGo).length;
+            const boardedStudents = driverStudentsList.filter(s => s.isMorningGo && s.boarded).length;
+            document.getElementById('driver-trip-summary-text').innerText = `ขึ้นรถแล้ว ${boardedStudents}/${activeStudents} คน • ลา ${driverStudentsList.length - activeStudents} คน`;
+
+            let html = "";
+            filtered.forEach(st => {
+                let badgeHtml = "";
+                if (!st.isMorningGo) {
+                    badgeHtml = '<span class="px-2 py-0.5 rounded-md bg-rose-100 text-rose-700 font-bold text-[10px]">🔴 วันนี้ลา</span>';
+                } else if (st.boarded) {
+                    badgeHtml = '<span class="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold text-[10px]">🟢 ขึ้นรถแล้ว</span>';
+                } else {
+                    badgeHtml = '<span class="px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 font-bold text-[10px]">🟡 ยังไม่ขึ้น</span>';
+                }
+
                 html += `
-                    <div class="p-2.5 bg-white rounded-xl border border-emerald-100 flex justify-between items-center shadow-sm">
-                        <div class="flex items-center gap-2">
-                            <span class="w-5 h-5 rounded-full bg-emerald-600 text-white font-extrabold text-[10px] flex items-center justify-center">${idx + 1}</span>
+                    <div class="p-3 bg-white rounded-xl border border-blue-100 space-y-2 shadow-sm">
+                        <div class="flex justify-between items-start">
                             <div>
-                                <p class="font-bold text-slate-800 text-xs">${schoolName}</p>
-                                <p class="text-[10px] text-slate-500">จำนวนนักเรียน: ${studentsAtSchool.length} คน</p>
+                                <p class="font-bold text-slate-900 text-xs">${st.name} <span class="text-slate-500 text-[10px]">(${st.nickname})</span></p>
+                                <p class="text-[10px] text-slate-500 mt-0.5">🏫 ${st.school} • 🏠 ${st.address}</p>
+                            </div>
+                            ${badgeHtml}
+                        </div>
+                        <div class="flex justify-between items-center pt-1 border-t border-slate-100">
+                            <span class="text-[10px] text-slate-600 font-semibold">👨‍👩‍👦 ${st.parentName}</span>
+                            <div class="flex gap-1.5">
+                                ${st.isMorningGo ? `
+                                    <button onclick="toggleStudentBoarding(${st.id})" class="px-2.5 py-1 ${st.boarded ? 'bg-amber-100 text-amber-800 hover:bg-amber-200' : 'bg-emerald-600 text-white hover:bg-emerald-700'} font-bold text-[10px] rounded-lg shadow-sm transition">
+                                        ${st.boarded ? 'ยกเลิกการขึ้น' : 'เช็กขึ้นรถ'}
+                                    </button>
+                                ` : ''}
+                                <button onclick="openChatScreen('${st.name}', 'นักเรียน')" class="p-1 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 rounded-lg text-xs" title="แชท">
+                                    <i class="fa-solid fa-comments"></i>
+                                </button>
                             </div>
                         </div>
-                        <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">จุดแวะที่ ${idx + 1}</span>
                     </div>
                 `;
             });
+
             container.innerHTML = html;
         }
 
-        // Render Driver Payment Management
+        function toggleStudentBoarding(id) {
+            const st = driverStudentsList.find(s => s.id === id);
+            if (st) {
+                st.boarded = !st.boarded;
+                renderDriverStudentList();
+                showToast(st.boarded ? "เช็กขึ้นรถสำเร็จ" : "ยกเลิกการขึ้นรถ", `${st.name} (${st.nickname})`, st.boarded ? "fa-solid fa-circle-check" : "fa-solid fa-rotate-left");
+            }
+        }
+
+        function renderDriverSchoolList() {
+            const container = document.getElementById('school-list-container');
+            if (!container) return;
+
+            document.getElementById('active-school-count-label').innerText = schoolRouteOrder.length;
+            let html = "";
+            schoolRouteOrder.forEach((schoolName, idx) => {
+                const count = driverStudentsList.filter(s => s.school === schoolName && s.isMorningGo).length;
+                html += `
+                    <div class="p-2.5 bg-white rounded-xl border border-emerald-100 flex justify-between items-center shadow-sm">
+                        <div class="flex items-center gap-2">
+                            <span class="w-5 h-5 rounded-full bg-emerald-700 text-white font-extrabold text-[10px] flex items-center justify-center">${idx + 1}</span>
+                            <span class="font-bold text-xs text-slate-800">${schoolName}</span>
+                        </div>
+                        <span class="text-[10px] font-bold bg-emerald-100 text-emerald-900 px-2 py-0.5 rounded-lg">รับส่งวันนี้ ${count} คน</span>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
         function renderDriverPaymentList() {
             const container = document.getElementById('driver-payment-items-list');
             if (!container) return;
 
-            let html = '';
-            driverStudentsList.forEach(s => {
-                const isPaid = s.payStatus.includes('PAID');
-                const badge = isPaid ? 
-                    `<span class="text-[9px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-md">ชำระแล้ว</span>` :
-                    `<span class="text-[9px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-md">ค้างชำระ</span>`;
+            let html = "";
+            driverStudentsList.forEach(st => {
+                let statusBadge = "";
+                if (st.payStatus === 'PAID_TRANSFER') {
+                    statusBadge = '<button onclick="viewSlipModal(' + st.id + ')" class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold text-[10px] rounded-md border border-emerald-300 flex items-center gap-1"><i class="fa-solid fa-check"></i> โอนแล้ว (ดูสลิป)</button>';
+                } else if (st.payStatus === 'PAID_CASH') {
+                    statusBadge = '<span class="px-2 py-0.5 bg-teal-100 text-teal-800 font-bold text-[10px] rounded-md border border-teal-300">💵 จ่ายเงินสดแล้ว</span>';
+                } else {
+                    statusBadge = `<button onclick="markCashPaidByDriver(${st.id})" class="px-2 py-0.5 bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-[10px] rounded-md border border-amber-300">⌛ รอชำระ (กดบันทึกรับเงินสด)</button>`;
+                }
 
                 html += `
                     <div class="p-2.5 bg-white rounded-xl border border-purple-100 flex justify-between items-center shadow-sm">
                         <div>
-                            <p class="font-bold text-slate-800 text-xs">${s.name}</p>
-                            <p class="text-[10px] text-purple-700">ค่ารถ: ฿${s.fare.toLocaleString()} / เดือน</p>
+                            <p class="font-bold text-slate-800 text-xs">${st.name} <span class="text-purple-700 font-extrabold">฿${st.fare.toLocaleString()}</span></p>
+                            <p class="text-[9px] text-slate-400 mt-0.5">ผู้ปกครอง: ${st.parentName}</p>
                         </div>
-                        <div class="flex items-center gap-2">
-                            ${badge}
-                            <button onclick="togglePaymentStatus(${s.id})" class="text-[10px] px-2 py-1 rounded-lg font-bold bg-purple-600 text-white shadow hover:bg-purple-700 transition">
-                                ${isPaid ? 'ยกเลิก' : 'รับเงิน'}
-                            </button>
-                        </div>
+                        ${statusBadge}
                     </div>
                 `;
             });
+
             container.innerHTML = html;
         }
 
-        function togglePaymentStatus(studentId) {
-            const student = driverStudentsList.find(s => s.id === studentId);
-            if (student) {
-                student.payStatus = student.payStatus.includes('PAID') ? 'UNPAID' : 'PAID_CASH';
-                showToast("อัปเดตการชำระเงิน", `เปลี่ยนสถานะชำระเงินของ ${student.name} เรียบร้อยแล้ว`, "fa-solid fa-wallet", "bg-purple-500/20 text-purple-400");
+        function markCashPaidByDriver(id) {
+            const st = driverStudentsList.find(s => s.id === id);
+            if (st) {
+                st.payStatus = 'PAID_CASH';
                 renderDriverPaymentList();
+                showToast("บันทึกรับเงินสดสำเร็จ", `รับชำระค่ารถจาก ${st.name} เรียบร้อยแล้ว`, "fa-solid fa-money-bill-wave", "bg-emerald-500/20 text-emerald-400");
             }
         }
 
-        // Render Student View UI Controls
-        function renderStudentSelfUI() {
-            const mainWrapper = document.getElementById('student-main-content-wrapper');
+        // ================= STUDENT LOGIC & FUNCTIONS =================
+        function openJoinVanModal(role) {
+            document.getElementById('join-van-modal').classList.remove('hidden');
+            document.getElementById('join-van-modal').classList.add('flex');
+        }
+
+        function closeJoinVanModal() {
+            document.getElementById('join-van-modal').classList.add('hidden');
+            document.getElementById('join-van-modal').classList.remove('flex');
+        }
+
+        function submitJoinVanRequest() {
+            const code = document.getElementById('input-join-van-code').value.trim();
+            if (!code) {
+                alert("กรุณากรอกรหัสประจำรถตู้ 6 ตัว");
+                return;
+            }
+            closeJoinVanModal();
+            showToast("ส่งคำขอสำเร็จ!", `ส่งคำขอเข้าร่วมรถตู้รหัส ${code.toUpperCase()} ไปยังคนขับแล้ว`, "fa-solid fa-paper-plane", "bg-indigo-500/20 text-indigo-400");
+
+            // Unlock Student Interface directly
+            isStudentRegistered = true;
+            updateStudentRegistrationUI();
+        }
+
+        function updateStudentRegistrationUI() {
+            const wrapper = document.getElementById('student-main-content-wrapper');
             const joinCard = document.getElementById('student-van-join-card');
 
-            if (!isStudentRegistered) {
-                if (mainWrapper) mainWrapper.className = "space-y-3 opacity-50 pointer-events-none transition-all";
-                if (joinCard) joinCard.innerHTML = `
-                    <button onclick="openJoinVanModal('student')" class="w-full py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs rounded-2xl shadow-md transition flex items-center justify-center gap-2 active:scale-98">
+            if (isStudentRegistered) {
+                wrapper.classList.remove('opacity-50', 'pointer-events-none');
+                joinCard.innerHTML = `
+                    <div class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-2xl flex justify-between items-center shadow-sm">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-600 text-base"></i>
+                            <div>
+                                <p class="text-xs font-bold text-emerald-950">ผูกข้อมูลกับรถตู้ V-98765 แล้ว</p>
+                                <p class="text-[10px] text-emerald-700">ลุงศักดิ์ (นายศักดิ์ชัย มีสุข)</p>
+                            </div>
+                        </div>
+                        <button onclick="cancelStudentRegistration()" class="text-[9px] bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold px-2 py-1 rounded-lg border border-rose-300">
+                            ยกเลิกผูกรถ
+                        </button>
+                    </div>
+                `;
+            } else {
+                wrapper.classList.add('opacity-50', 'pointer-events-none');
+                joinCard.innerHTML = `
+                    <button onclick="openJoinVanModal('student')" id="btn-join-van-action" class="w-full py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs rounded-2xl shadow-md transition flex items-center justify-center gap-2 active:scale-98">
                         <i class="fa-solid fa-qrcode"></i>
                         <span>🔗 เข้าร่วมรถตู้ (สแกน QR / กรอกรหัส 6 หลัก)</span>
-                    </button>;
-            } else {
-                if (mainWrapper) mainWrapper.className = "space-y-3 transition-all";
-                if (joinCard) joinCard.innerHTML = `
-                    <div class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-2xl flex justify-between items-center text-xs">
-                        <span class="font-bold text-emerald-900"><i class="fa-solid fa-circle-check text-emerald-600"></i> สมาชิกประจำรถตู้ V-98765</span>
-                        <button onclick="leaveVanGroup()" class="text-[10px] bg-rose-100 text-rose-700 font-bold px-2 py-1 rounded-lg hover:bg-rose-200 transition">ออกจากรถตู้</button>
-                    </div>;
+                    </button>
+                `;
             }
         }
 
-        function leaveVanGroup() {
-            isStudentRegistered = false;
-            showToast("ออกจากรถตู้แล้ว", "คุณได้ยกเลิกการผูกบัญชีกับรถตู้ V-98765 เรียบร้อยแล้ว", "fa-solid fa-right-from-bracket", "bg-rose-500/20 text-rose-400");
-            renderStudentSelfUI();
+        function cancelStudentRegistration() {
+            if (confirm("คุณต้องการยกเลิกการเชื่อมต่อกับรถตู้คันนี้ใช่หรือไม่?")) {
+                isStudentRegistered = false;
+                updateStudentRegistrationUI();
+                showToast("ยกเลิกการผูกรถตู้แล้ว", "คุณสามารถสแกนเข้าร่วมรถตู้คันใหม่ได้ตลอดเวลา", "fa-solid fa-link-slash", "bg-rose-500/20 text-rose-400");
+            }
         }
 
-        // Attendance Switch Functions for Student
-        function setMorningStatus(go) {
-            isMorningGoTomorrow = go;
+        function setMorningStatus(isGoing) {
+            isMorningGoTomorrow = isGoing;
             const btnGo = document.getElementById('btn-morning-go');
             const btnSkip = document.getElementById('btn-morning-skip');
 
-            if (go) {
+            if (isGoing) {
                 btnGo.className = "py-2.5 px-2 bg-emerald-600 text-white font-bold text-xs rounded-xl shadow transition flex items-center justify-center gap-1 active:scale-95";
                 btnSkip.className = "py-2.5 px-2 bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-rose-700 font-bold text-xs rounded-xl border border-slate-200 transition flex items-center justify-center gap-1 active:scale-95";
             } else {
-                btnSkip.className = "py-2.5 px-2 bg-rose-600 text-white font-bold text-xs rounded-xl shadow transition flex items-center justify-center gap-1 active:scale-95";
                 btnGo.className = "py-2.5 px-2 bg-slate-100 hover:bg-emerald-100 text-slate-600 hover:text-emerald-700 font-bold text-xs rounded-xl border border-slate-200 transition flex items-center justify-center gap-1 active:scale-95";
+                btnSkip.className = "py-2.5 px-2 bg-rose-600 text-white font-bold text-xs rounded-xl shadow transition flex items-center justify-center gap-1 active:scale-95";
             }
-            showToast("อัปเดตสถานะรอบเช้า", go ? "แจ้งไปโรงเรียนรอบเช้าปกติแล้ว" : "แจ้งลากิจรอบเช้าแล้ว ข้อมูลจะส่งถึงคนขับทันที", "fa-solid fa-calendar-check", "bg-blue-500/20 text-blue-400");
+
+            // Sync with student list
+            const st = driverStudentsList.find(s => s.id === 1);
+            if (st) st.isMorningGo = isGoing;
+            renderDriverStudentList();
+
+            updateStudentSelfStatusDisplay();
+            showToast("อัปเดตรอบเช้าแล้ว", isGoing ? "แจ้งไปโรงเรียนรอบเช้าปกติ" : "แจ้งลาหยุดรอบเช้าเรียบร้อย", "fa-solid fa-calendar-day");
         }
 
-        function setEveningStatus(go) {
-            isEveningGo = go;
+        function setEveningStatus(isGoing) {
+            isEveningGo = isGoing;
             const btnGo = document.getElementById('btn-evening-go');
             const btnSkip = document.getElementById('btn-evening-skip');
 
-            if (go) {
+            if (isGoing) {
                 btnGo.className = "py-2.5 px-2 bg-blue-600 text-white font-bold text-xs rounded-xl shadow transition flex items-center justify-center gap-1 active:scale-95";
                 btnSkip.className = "py-2.5 px-2 bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-rose-700 font-bold text-xs rounded-xl border border-slate-200 transition flex items-center justify-center gap-1 active:scale-95";
             } else {
-                btnSkip.className = "py-2.5 px-2 bg-rose-600 text-white font-bold text-xs rounded-xl shadow transition flex items-center justify-center gap-1 active:scale-95";
                 btnGo.className = "py-2.5 px-2 bg-slate-100 hover:bg-blue-100 text-slate-600 hover:text-blue-700 font-bold text-xs rounded-xl border border-slate-200 transition flex items-center justify-center gap-1 active:scale-95";
+                btnSkip.className = "py-2.5 px-2 bg-rose-600 text-white font-bold text-xs rounded-xl shadow transition flex items-center justify-center gap-1 active:scale-95";
             }
-            showToast("อัปเดตสถานะรอบเย็น", go ? "แจ้งกลับรถตู้วันนี้ปกติแล้ว" : "แจ้งไม่กลับรถตู้วันนี้แล้ว", "fa-solid fa-calendar-check", "bg-purple-500/20 text-purple-400");
+
+            const st = driverStudentsList.find(s => s.id === 1);
+            if (st) st.isEveningGo = isGoing;
+
+            updateStudentSelfStatusDisplay();
+            showToast("อัปเดตรอบเย็นแล้ว", isGoing ? "แจ้งกลับรถตู้อิสระรอบเย็น" : "แจ้งไม่กลับรถตู้รอบเย็น", "fa-solid fa-cloud-moon");
         }
 
         function setFullDayLeave() {
             setMorningStatus(false);
             setEveningStatus(false);
-            showToast("แจ้งลาพักทั้งวัน", "ตั้งค่าลาหยุดทั้งรอบเช้าและรอบเย็นวันนี้เรียบร้อยแล้ว", "fa-solid fa-umbrella-beach", "bg-rose-500/20 text-rose-400");
+            showToast("ลาหยุดทั้งวัน", "แจ้งลากิจรอบเช้าและรอบเย็นเรียบร้อยแล้ว", "fa-solid fa-umbrella-beach", "bg-rose-500/20 text-rose-400");
         }
 
-        // Student Special Notice Draft & Send Logic
+        function updateStudentSelfStatusDisplay() {
+            const dispText = document.getElementById('student-self-status-display');
+            const dispBadge = document.getElementById('student-self-badge');
+
+            if (isMorningGoTomorrow && isEveningGo) {
+                dispText.innerText = "✅ ไปโรงเรียนปกติ (รับเช้า & ส่งเย็น)";
+                dispBadge.innerText = "ปกติ";
+                dispBadge.className = "text-xs bg-emerald-500 text-white font-bold px-2.5 py-1 rounded-xl shadow";
+            } else if (!isMorningGoTomorrow && !isEveningGo) {
+                dispText.innerText = "🏖️ ลาหยุดทั้งวัน (เช้าไม่ไป & เย็นไม่กลับ)";
+                dispBadge.innerText = "ลาทั้งวัน";
+                dispBadge.className = "text-xs bg-rose-600 text-white font-bold px-2.5 py-1 rounded-xl shadow";
+            } else if (!isMorningGoTomorrow && isEveningGo) {
+                dispText.innerText = "🌅 ลาเฉพาะรอบเช้า • รอบเย็นกลับรถตู้ปกติ";
+                dispBadge.innerText = "ลาเช้า";
+                dispBadge.className = "text-xs bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded-xl shadow";
+            } else {
+                dispText.innerText = "🌆 รอบเช้าไปรถตู้ • รอบเย็นไม่กลับรถตู้";
+                dispBadge.innerText = "ลาเย็น";
+                dispBadge.className = "text-xs bg-purple-600 text-white font-bold px-2.5 py-1 rounded-xl shadow";
+            }
+        }
+
         function requestLateTime(minutes) {
+            activeNoteText = `📍 หมายเหตุ: ขอไปรอรถตู้สาย ${minutes} นาที`;
             studentNoteState = 'draft';
-            activeNoteText = `ขอเลท ${minutes} นาที`;
-            updateStudentNoticeBoxUI();
-            showToast("ร่างหมายเหตุสำเร็จ", `เพิ่มร่างหมายเหตุ "ขอเลท ${minutes} นาที" แล้ว กดส่งให้คนขับได้ทันที`, "fa-solid fa-pen-to-square", "bg-amber-500/20 text-amber-400");
+            renderStudentActiveNoticeBox();
+            showToast("สร้างฉบับร่างแล้ว", `ขอเลท ${minutes} นาที (กรุณากดส่งให้คนขับ)`, "fa-solid fa-bookmark", "bg-amber-500/20 text-amber-400");
         }
 
-        function updateStudentNoticeBoxUI() {
+        function openCustomLocationNoteModal() {
+            document.getElementById('custom-location-modal').classList.remove('hidden');
+            document.getElementById('custom-location-modal').classList.add('flex');
+        }
+
+        function closeCustomLocationModal() {
+            document.getElementById('custom-location-modal').classList.add('hidden');
+            document.getElementById('custom-location-modal').classList.remove('flex');
+        }
+
+        function saveDraftCustomNote() {
+            const val = document.getElementById('input-custom-location').value.trim();
+            if (!val) return;
+            activeNoteText = `📍 หมายเหตุ: ${val}`;
+            studentNoteState = 'draft';
+            closeCustomLocationModal();
+            renderStudentActiveNoticeBox();
+            showToast("บันทึกฉบับร่างสำเร็จ", "กรุณากดปุ่มส่งเพื่อส่งหมายเหตุนี้ไปยังคนขับ", "fa-solid fa-paper-plane");
+        }
+
+        function renderStudentActiveNoticeBox() {
             const box = document.getElementById('student-active-notice-box');
-            const badge = document.getElementById('student-notice-badge');
-            const text = document.getElementById('student-active-notice-text');
-            const actionBtns = document.getElementById('student-notice-action-buttons');
+            if (!box) return;
 
             if (studentNoteState === 'none') {
                 box.classList.add('hidden');
-            } else if (studentNoteState === 'draft') {
-                box.classList.remove('hidden');
-                box.className = "rounded-2xl p-3.5 space-y-2 shadow-sm transition-all border bg-amber-50 border-amber-200";
-                badge.className = "text-[9px] font-bold px-2.5 py-0.5 rounded-full shadow-sm bg-amber-200 text-amber-900";
+                return;
+            }
+
+            box.classList.remove('hidden');
+            document.getElementById('student-active-notice-text').innerText = `"${activeNoteText}"`;
+
+            const badge = document.getElementById('student-notice-badge');
+            const actions = document.getElementById('student-notice-action-buttons');
+
+            if (studentNoteState === 'draft') {
                 badge.innerText = "ฉบับร่าง";
-                text.innerText = `"${activeNoteText}"`;
-                actionBtns.classList.remove('hidden');
+                badge.className = "text-[9px] font-bold px-2.5 py-0.5 rounded-full shadow-sm bg-amber-200 text-amber-900";
+                actions.classList.remove('hidden');
             } else if (studentNoteState === 'sent') {
-                box.classList.remove('hidden');
-                box.className = "rounded-2xl p-3.5 space-y-2 shadow-sm transition-all border bg-emerald-50 border-emerald-200";
-                badge.className = "text-[9px] font-bold px-2.5 py-0.5 rounded-full shadow-sm bg-emerald-200 text-emerald-900";
                 badge.innerText = "ส่งแล้ว (รออนุมัติ)";
-                text.innerText = `"${activeNoteText}"`;
-                actionBtns.classList.add('hidden');
+                badge.className = "text-[9px] font-bold px-2.5 py-0.5 rounded-full shadow-sm bg-blue-200 text-blue-900";
+                actions.classList.add('hidden');
+            } else if (studentNoteState === 'approved') {
+                badge.innerText = "อนุมัติแล้ว ✅";
+                badge.className = "text-[9px] font-bold px-2.5 py-0.5 rounded-full shadow-sm bg-emerald-200 text-emerald-900";
+                actions.classList.add('hidden');
             }
         }
 
         function sendDraftNotice() {
             studentNoteState = 'sent';
-            updateStudentNoticeBoxUI();
-            showToast("ส่งหมายเหตุแล้ว", "หมายเหตุของคุณถูกส่งไปยังคนขับเรียบร้อยแล้ว", "fa-solid fa-paper-plane", "bg-emerald-500/20 text-emerald-400");
+            renderStudentActiveNoticeBox();
+
+            // Sync with Driver Panel Notice
+            document.getElementById('driver-notice-text-content').innerText = activeNoteText;
+            document.getElementById('notice-status-tag').innerText = "รออนุมัติ";
+            document.getElementById('notice-status-tag').className = "text-[9px] bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded-md";
+            document.getElementById('notice-ping-dot').classList.remove('hidden');
+
+            // Trigger Beep Alert Simulation for Driver
+            playBeepSound();
+
+            showToast("ส่งคำขอเรียบร้อยแล้ว!", "ระบบส่งการแจ้งเตือนพร้อมเสียงเตือนไปยังคนขับแล้ว", "fa-solid fa-paper-plane", "bg-emerald-500/20 text-emerald-400");
         }
 
         function deleteDraftNotice() {
             studentNoteState = 'none';
             activeNoteText = "";
-            updateStudentNoticeBoxUI();
-            showToast("ลบหมายเหตุ", "ยกเลิกหมายเหตุพิเศษเรียบร้อยแล้ว", "fa-solid fa-trash", "bg-slate-500/20 text-slate-400");
+            renderStudentActiveNoticeBox();
+            showToast("ลบฉบับร่างเรียบร้อย", "", "fa-solid fa-trash-can");
         }
 
-        // Driver Notice Approval Logic
+        // ================= DRIVER NOTICE APPROVAL =================
         function approveNoticeByDriver() {
-            const card = document.getElementById('driver-notice-card-container');
-            const statusTag = document.getElementById('notice-status-tag');
-            const actionBox = document.getElementById('driver-notice-action-box');
-
-            if (statusTag) { statusTag.innerText = "อนุมัติแล้ว"; statusTag.className = "text-[9px] bg-emerald-200 text-emerald-900 font-bold px-2 py-0.5 rounded-md"; }
-            if (actionBox) { actionBox.innerHTML = `<p class="text-xs font-bold text-emerald-700 text-center py-1">✓ อนุมัติคำขอนี้เรียบร้อยแล้ว</p>`; }
-
-            showToast("อนุมัติคำขอแล้ว", "ระบบส่งการอนุมัติแจ้งเตือนไปยังนักเรียนเรียบร้อยแล้ว", "fa-solid fa-circle-check", "bg-emerald-500/20 text-emerald-400");
+            studentNoteState = 'approved';
+            renderStudentActiveNoticeBox();
+            document.getElementById('notice-status-tag').innerText = "อนุมัติแล้ว ✅";
+            document.getElementById('notice-status-tag').className = "text-[9px] bg-emerald-200 text-emerald-900 font-bold px-2 py-0.5 rounded-md";
+            document.getElementById('notice-ping-dot').classList.add('hidden');
+            showToast("อนุมัติคำขอแล้ว", "ส่งการยืนยันไปยังแอปพลิเคชันนักเรียนแล้ว", "fa-solid fa-circle-check", "bg-emerald-500/20 text-emerald-400");
         }
 
         function disapproveNoticeByDriver() {
-            const statusTag = document.getElementById('notice-status-tag');
-            const actionBox = document.getElementById('driver-notice-action-box');
-
-            if (statusTag) { statusTag.innerText = "ไม่อนุมัติ"; statusTag.className = "text-[9px] bg-rose-200 text-rose-900 font-bold px-2 py-0.5 rounded-md"; }
-            if (actionBox) { actionBox.innerHTML = `<p class="text-xs font-bold text-rose-700 text-center py-1">✕ ปฏิเสธคำขอนี้แล้ว</p>`; }
-
-            showToast("ปฏิเสธคำขอ", "ส่งการแจ้งเตือนปฏิเสธไปยังนักเรียนเรียบร้อยแล้ว", "fa-solid fa-ban", "bg-rose-500/20 text-rose-400");
+            studentNoteState = 'none';
+            renderStudentActiveNoticeBox();
+            document.getElementById('notice-status-tag').innerText = "ปฏิเสธแล้ว ❌";
+            document.getElementById('notice-status-tag').className = "text-[9px] bg-rose-200 text-rose-900 font-bold px-2 py-0.5 rounded-md";
+            document.getElementById('notice-ping-dot').classList.add('hidden');
+            showToast("ปฏิเสธคำขอ", "แจ้งไปยังนักเรียนเรียบร้อยแล้ว", "fa-solid fa-ban", "bg-rose-500/20 text-rose-400");
         }
 
-        // Parent Multi-Child & Trip Step Logic
+        // ================= PARENT LOGIC & SIMULATORS =================
         function renderParentChildButtons() {
             const container = document.getElementById('parent-child-buttons-container');
             if (!container) return;
 
-            let html = '';
-            driverStudentsList.forEach(s => {
-                const active = s.id === selectedParentChildId;
+            let html = "";
+            driverStudentsList.forEach(st => {
+                const isSelected = st.id === selectedParentChildId;
                 html += `
-                    <button onclick="selectParentChild(${s.id})" class="px-3 py-1.5 rounded-xl font-bold text-xs whitespace-nowrap transition flex items-center gap-1.5 ${active ? 'bg-purple-700 text-white shadow-md' : 'bg-white text-purple-900 border border-purple-200 hover:bg-purple-100'}">
-                        <i class="fa-solid fa-child text-xs"></i>
-                        <span>${s.nickname}</span>
+                    <button onclick="selectParentChild(${st.id})" class="px-3 py-1.5 rounded-xl font-bold text-xs whitespace-nowrap transition flex items-center gap-1.5 ${isSelected ? 'bg-purple-700 text-white shadow-md' : 'bg-white text-slate-700 border border-purple-200 hover:bg-purple-100'}">
+                        <i class="fa-solid fa-user-graduate text-[10px]"></i>
+                        <span>${st.nickname}</span>
                     </button>
                 `;
             });
             container.innerHTML = html;
         }
 
-        function selectParentChild(childId) {
-            selectedParentChildId = childId;
-            const student = driverStudentsList.find(s => s.id === childId);
-            if (student) {
-                document.getElementById('parent-disp-child').innerText = student.name;
-                document.getElementById('parent-trip-title').innerText = `สถานะการเดินทางของ${student.nickname}`;
-                document.getElementById('parent-fee-display').innerText = `฿${student.fare.toLocaleString()}`;
-            }
+        function selectParentChild(id) {
+            selectedParentChildId = id;
             renderParentChildButtons();
+            const st = driverStudentsList.find(s => s.id === id);
+            if (st) {
+                document.getElementById('parent-disp-child').innerText = st.name;
+                document.getElementById('parent-trip-title').innerText = `สถานะการเดินทางของ${st.nickname}`;
+                document.getElementById('parent-fee-display').innerText = `฿${st.fare.toLocaleString()}`;
+            }
             renderParentTripSteps();
         }
 
@@ -2028,9 +2081,15 @@
                 btnM.className = "px-2.5 py-1 rounded-lg bg-purple-700 text-white shadow";
                 btnE.className = "px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900";
             } else {
-                btnE.className = "px-2.5 py-1 rounded-lg bg-purple-700 text-white shadow";
                 btnM.className = "px-2.5 py-1 rounded-lg text-slate-600 hover:text-slate-900";
+                btnE.className = "px-2.5 py-1 rounded-lg bg-purple-700 text-white shadow";
             }
+            renderParentTripSteps();
+        }
+
+        function setParentTripStep(stepNum) {
+            if (parentTripMode === 'morning') parentMorningStep = stepNum;
+            else parentEveningStep = stepNum;
             renderParentTripSteps();
         }
 
@@ -2039,89 +2098,420 @@
             const simButtons = document.getElementById('trip-simulator-buttons');
             if (!container) return;
 
-            const currentStep = parentTripMode === 'morning' ? parentMorningStep : parentEveningStep;
+            const isMorning = (parentTripMode === 'morning');
+            const currentStep = isMorning ? parentMorningStep : parentEveningStep;
 
-            const steps = parentTripMode === 'morning' ? [
-                { step: 1, title: "รถตู้กำลังเดินทางไปรับที่บ้าน", sub: "ประมาณการถึง 07:15 น.", icon: "fa-bus" },
-                { step: 2, title: "นักเรียนขึ้นรถตู้แล้ว", sub: "ลุงศักดิ์เช็กขึ้นรถเวลา 07:18 น.", icon: "fa-user-check" },
-                { step: 3, title: "กำลังมุ่งหน้าสู่โรงเรียน", sub: "ระยะทางเหลือ 2.4 กม.", icon: "fa-route" },
-                { step: 4, title: "ถึงโรงเรียนอย่างปลอดภัย", sub: "ส่งถึงโรงเรียนเวลา 07:42 น.", icon: "fa-school-circle-check" }
-            ] : [
-                { step: 1, title: "รอรถตู้ออกจากโรงเรียน", sub: "กำหนดการออก 16:00 น.", icon: "fa-clock" },
-                { step: 2, title: "นักเรียนขึ้นรถตู้รอบเย็นแล้ว", sub: "ขึ้นรถเวลา 16:05 น.", icon: "fa-user-check" },
-                { step: 3, title: "กำลังเดินทางกลับบ้าน", sub: "การจราจรปกติ", icon: "fa-van-shuttle" },
-                { step: 4, title: "ถึงบ้านเรียบร้อยแล้ว", sub: "ส่งถึงหน้าบ้านเวลา 16:35 น.", icon: "fa-house-circle-check" }
+            const morningSteps = [
+                { title: "คนขับกำลังเดินทางไปรับที่บ้าน", sub: "คาดว่าจะถึงภายใน 10 นาที" },
+                { title: "แวะรับน้องขึ้นรถตู้เรียบร้อย", sub: "เวลา 07:12 น." },
+                { title: "กำลังเดินทางมุ่งหน้าไปโรงเรียน", sub: "อยู่บนเส้นทางหลัก" },
+                { title: "ส่งถึงโรงเรียนสาธิตพัฒนาแล้ว", sub: "เวลา 07:45 น. (ปลอดภัย)" }
             ];
 
-            let html = '';
-            steps.forEach(s => {
-                const active = s.step <= currentStep;
-                const isCurrent = s.step === currentStep;
+            const eveningSteps = [
+                { title: "รถตู้จอดรอรับหน้าที่โรงเรียน", sub: "เวลานัดหมาย 15:30 น." },
+                { title: "น้องขึ้นรถตู้เลิกเรียนเรียบร้อย", sub: "เวลา 15:40 น." },
+                { title: "กำลังเดินทางกลับบ้าน", sub: "คาดว่าจะถึงใน 20 นาที" },
+                { title: "ส่งถึงบ้านอย่างปลอดภัย", sub: "เวลา 16:15 น." }
+            ];
+
+            const steps = isMorning ? morningSteps : eveningSteps;
+
+            // Render Test Step Simulator Buttons
+            let simHtml = "";
+            for (let i = 1; i <= 4; i++) {
+                simHtml += `<button onclick="setParentTripStep(${i})" class="px-2 py-0.5 rounded ${currentStep === i ? 'bg-purple-700 text-white font-bold' : 'bg-slate-200 text-slate-700'} text-[10px]">ขั้นที่ ${i}</button>`;
+            }
+            simButtons.innerHTML = simHtml;
+
+            // Render Step Timeline
+            let html = "";
+            steps.forEach((s, idx) => {
+                const stepIdx = idx + 1;
+                const isPassed = stepIdx <= currentStep;
+                const isCurrent = stepIdx === currentStep;
+
+                let iconBg = isPassed ? "bg-emerald-500 text-white" : "bg-slate-200 text-slate-500";
+                if (isCurrent) iconBg = "bg-amber-500 text-slate-950 font-black animate-bounce";
 
                 html += `
-                    <div class="flex items-start gap-3 p-2.5 rounded-xl ${isCurrent ? 'bg-purple-50 border border-purple-200' : ''}">
-                        <div class="w-8 h-8 rounded-full ${active ? 'bg-purple-600 text-white' : 'bg-slate-200 text-slate-400'} font-bold flex items-center justify-center text-xs flex-shrink-0">
-                            <i class="fa-solid ${s.icon}"></i>
+                    <div class="flex gap-3 items-start relative">
+                        <div class="w-6 h-6 rounded-full ${iconBg} text-xs font-bold flex items-center justify-center flex-shrink-0 z-10 shadow">
+                            ${isPassed ? '<i class="fa-solid fa-check"></i>' : stepIdx}
                         </div>
-                        <div class="flex-1">
-                            <p class="text-xs font-bold ${active ? 'text-purple-950' : 'text-slate-400'}">${s.title}</p>
-                            <p class="text-[10px] ${active ? 'text-purple-700' : 'text-slate-400'}">${s.sub}</p>
+                        <div class="flex-1 pb-2">
+                            <p class="text-xs font-bold ${isPassed ? 'text-slate-900' : 'text-slate-400'}">${s.title}</p>
+                            <p class="text-[10px] ${isPassed ? 'text-purple-700' : 'text-slate-400'}">${s.sub}</p>
                         </div>
-                        ${active ? '<i class="fa-solid fa-circle-check text-emerald-500 text-sm mt-1"></i>' : ''}
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // ================= PAYMENT GATEWAYS & MODALS =================
+        function openCashPaymentModal() {
+            document.getElementById('cash-payment-modal').classList.remove('hidden');
+            document.getElementById('cash-payment-modal').classList.add('flex');
+        }
+
+        function closeCashPaymentModal() {
+            document.getElementById('cash-payment-modal').classList.add('hidden');
+            document.getElementById('cash-payment-modal').classList.remove('flex');
+        }
+
+        function confirmCashPayment() {
+            closeCashPaymentModal();
+            const st = driverStudentsList.find(s => s.id === selectedParentChildId);
+            if (st) st.payStatus = 'PAID_CASH';
+            renderDriverPaymentList();
+
+            document.getElementById('parent-payment-buttons-grid').classList.add('hidden');
+            const successBanner = document.getElementById('parent-payment-success-banner');
+            successBanner.classList.remove('hidden');
+            successBanner.innerHTML = "💵 แจ้งการชำระด้วยเงินสดเรียบร้อยแล้ว (รอคนขับกดยืนยันรับเงิน)";
+            
+            document.getElementById('parent-bill-status-badge').innerText = "💵 แจ้งชำระเงินสดแล้ว";
+            document.getElementById('parent-bill-status-badge').className = "text-[10px] bg-teal-100 text-teal-900 font-bold px-2.5 py-1 rounded-full border border-teal-300";
+
+            showToast("แจ้งชำระเงินสดแล้ว", "ส่งข้อมูลไปยังคนขับเรียบร้อยแล้ว", "fa-solid fa-money-bill-wave");
+        }
+
+        function openQRPaymentModal() {
+            document.getElementById('qr-payment-modal').classList.remove('hidden');
+            document.getElementById('qr-payment-modal').classList.add('flex');
+
+            // Generate Real PromptPay QR Code
+            const qrContainer = document.getElementById('promptpay-qrcode-container');
+            qrContainer.innerHTML = "";
+            new QRCode(qrContainer, {
+                text: `00020101021129370016A00000067701011101130066${driverPromptPayNumber}5802TH530376454042500540525006304`,
+                width: 150,
+                height: 150
+            });
+        }
+
+        function closeQRPaymentModal() {
+            document.getElementById('qr-payment-modal').classList.add('hidden');
+            document.getElementById('qr-payment-modal').classList.remove('flex');
+        }
+
+        function confirmTransferPayment() {
+            closeQRPaymentModal();
+            const st = driverStudentsList.find(s => s.id === selectedParentChildId);
+            if (st) st.payStatus = 'PAID_TRANSFER';
+            renderDriverPaymentList();
+
+            document.getElementById('parent-payment-buttons-grid').classList.add('hidden');
+            const successBanner = document.getElementById('parent-payment-success-banner');
+            successBanner.classList.remove('hidden');
+            successBanner.innerHTML = "✅ โอนเงินผ่านพร้อมเพย์เรียบร้อยแล้ว • ชำระสำเร็จ";
+
+            document.getElementById('parent-bill-status-badge').innerText = "✅ ชำระเงินเรียบร้อย";
+            document.getElementById('parent-bill-status-badge').className = "text-[10px] bg-emerald-100 text-emerald-900 font-bold px-2.5 py-1 rounded-full border border-emerald-300";
+
+            showToast("ชำระเงินสำเร็จ!", "บันทึกสลิปและปรับสถานะในระบบเรียบร้อย", "fa-solid fa-circle-check", "bg-emerald-500/20 text-emerald-400");
+        }
+
+        function viewSlipModal(id) {
+            document.getElementById('slip-modal').classList.remove('hidden');
+            document.getElementById('slip-modal').classList.add('flex');
+        }
+
+        function closeSlipModal() {
+            document.getElementById('slip-modal').classList.add('hidden');
+            document.getElementById('slip-modal').classList.remove('flex');
+        }
+
+        // ================= PROFILE EDIT MODAL =================
+        function openProfileEditModal(role) {
+            activeEditRole = role;
+            document.getElementById('profile-edit-modal').classList.remove('hidden');
+            document.getElementById('profile-edit-modal').classList.add('flex');
+
+            document.getElementById('quota-display-badge').innerText = `${editQuota[role]} / 3 ครั้ง`;
+
+            const container = document.getElementById('profile-form-fields');
+            const p = profileData[role];
+
+            if (role === 'driver') {
+                container.innerHTML = `
+                    <div><label class="font-bold text-slate-700 block mb-1">ชื่อ-นามสกุล คนขับ:</label><input type="text" id="edit-name" value="${p.name}" class="w-full p-2.5 bg-slate-50 border rounded-xl"></div>
+                    <div><label class="font-bold text-slate-700 block mb-1">เบอร์โทรศัพท์:</label><input type="text" id="edit-phone" value="${p.phone}" class="w-full p-2.5 bg-slate-50 border rounded-xl"></div>
+                    <div><label class="font-bold text-slate-700 block mb-1">ทะเบียนรถตู้:</label><input type="text" id="edit-license" value="${p.license}" class="w-full p-2.5 bg-slate-50 border rounded-xl"></div>
+                `;
+            } else if (role === 'student') {
+                container.innerHTML = `
+                    <div><label class="font-bold text-slate-700 block mb-1">ชื่อ-นามสกุล นักเรียน:</label><input type="text" id="edit-name" value="${p.name}" class="w-full p-2.5 bg-slate-50 border rounded-xl"></div>
+                    <div><label class="font-bold text-slate-700 block mb-1">เบอร์โทรศัพท์:</label><input type="text" id="edit-phone" value="${p.phone}" class="w-full p-2.5 bg-slate-50 border rounded-xl"></div>
+                    <div><label class="font-bold text-slate-700 block mb-1">ชื่อโรงเรียน:</label><input type="text" id="edit-school" value="${p.school}" class="w-full p-2.5 bg-slate-50 border rounded-xl"></div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div><label class="font-bold text-slate-700 block mb-1">ชื่อ-นามสกุล ผู้ปกครอง:</label><input type="text" id="edit-name" value="${p.name}" class="w-full p-2.5 bg-slate-50 border rounded-xl"></div>
+                    <div><label class="font-bold text-slate-700 block mb-1">เบอร์โทรศัพท์:</label><input type="text" id="edit-phone" value="${p.phone}" class="w-full p-2.5 bg-slate-50 border rounded-xl"></div>
+                `;
+            }
+        }
+
+        function closeProfileEditModal() {
+            document.getElementById('profile-edit-modal').classList.add('hidden');
+            document.getElementById('profile-edit-modal').classList.remove('flex');
+        }
+
+        function saveProfileChanges() {
+            if (editQuota[activeEditRole] <= 0) {
+                alert("สิทธิ์ในการแก้ไขข้อมูลเดือนนี้หมดแล้ว (3/3 ครั้ง)");
+                return;
+            }
+
+            const nameInput = document.getElementById('edit-name').value;
+            profileData[activeEditRole].name = nameInput;
+            editQuota[activeEditRole]--;
+
+            if (activeEditRole === 'driver') document.getElementById('driver-disp-name').innerText = nameInput;
+            if (activeEditRole === 'student') document.getElementById('student-disp-name').innerText = nameInput;
+            if (activeEditRole === 'parent') document.getElementById('parent-disp-name').innerText = nameInput;
+
+            closeProfileEditModal();
+            showToast("บันทึกการแก้ไขแล้ว", `สิทธิ์คงเหลือเดือนนี้ ${editQuota[activeEditRole]}/3 ครั้ง`, "fa-solid fa-floppy-disk");
+        }
+
+        function previewProfileImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('modal-avatar-img').src = e.target.result;
+                    document.getElementById('modal-avatar-img').classList.remove('hidden');
+                    document.getElementById('modal-avatar-text').classList.add('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // ================= OTHER MODALS & SHORTCUTS =================
+        function viewVanPhotoModal() {
+            document.getElementById('view-van-photo-modal').classList.remove('hidden');
+            document.getElementById('view-van-photo-modal').classList.add('flex');
+        }
+        function closeViewVanPhotoModal() {
+            document.getElementById('view-van-photo-modal').classList.add('hidden');
+            document.getElementById('view-van-photo-modal').classList.remove('flex');
+        }
+
+        function openVanQRModal() {
+            document.getElementById('van-qr-modal').classList.remove('hidden');
+            document.getElementById('van-qr-modal').classList.add('flex');
+
+            const vanQrContainer = document.getElementById('van-actual-qrcode-box');
+            vanQrContainer.innerHTML = "";
+            new QRCode(vanQrContainer, {
+                text: "VAN_TRACK_PRO_V98765_REGISTER",
+                width: 130,
+                height: 130
+            });
+        }
+
+        function closeVanQRModal() {
+            document.getElementById('van-qr-modal').classList.add('hidden');
+            document.getElementById('van-qr-modal').classList.remove('flex');
+        }
+
+        function simulateStudentScanRequest() {
+            closeVanQRModal();
+            document.getElementById('driver-accept-modal').classList.remove('hidden');
+            document.getElementById('driver-accept-modal').classList.add('flex');
+        }
+
+        function closeAcceptModal() {
+            document.getElementById('driver-accept-modal').classList.add('hidden');
+            document.getElementById('driver-accept-modal').classList.remove('flex');
+        }
+
+        function confirmAcceptStudent() {
+            closeAcceptModal();
+            showToast("ยอมรับนักเรียนเรียบร้อย", "เพิ่ม ด.ช. นพดล เรียนดี เข้าสู่รายชื่อประจำรถตู้แล้ว", "fa-solid fa-user-plus", "bg-emerald-500/20 text-emerald-400");
+        }
+
+        function openFareSettingsModal() {
+            document.getElementById('fare-settings-modal').classList.remove('hidden');
+            document.getElementById('fare-settings-modal').classList.add('flex');
+
+            const container = document.getElementById('fare-student-settings-container');
+            let html = "";
+            driverStudentsList.forEach(st => {
+                html += `
+                    <div class="flex justify-between items-center bg-slate-50 p-2 rounded-xl border border-slate-200">
+                        <span class="font-bold text-slate-800 text-xs">${st.name}</span>
+                        <input type="number" id="fare-input-${st.id}" value="${st.fare}" class="w-24 p-1.5 border rounded-lg text-right font-bold text-purple-900">
                     </div>
                 `;
             });
             container.innerHTML = html;
+        }
 
-            let simHtml = '';
-            [1, 2, 3, 4].forEach(stepNum => {
-                simHtml += `
-                    <button onclick="setParentTripStep(${stepNum})" class="px-2 py-1 bg-white hover:bg-purple-100 text-purple-900 border border-purple-200 rounded font-bold text-[10px] whitespace-nowrap">
-                        ขั้น ${stepNum}
+        function closeFareSettingsModal() {
+            document.getElementById('fare-settings-modal').classList.add('hidden');
+            document.getElementById('fare-settings-modal').classList.remove('flex');
+        }
+
+        function saveCustomFareRates() {
+            driverPromptPayNumber = document.getElementById('input-driver-promptpay').value.trim();
+            driverStudentsList.forEach(st => {
+                const val = document.getElementById(`fare-input-${st.id}`).value;
+                if (val) st.fare = parseInt(val);
+            });
+            renderDriverPaymentList();
+            closeFareSettingsModal();
+            showToast("บันทึกการตั้งค่าราคาแล้ว", "อัปเดตข้อมูลบัญชีรับเงินและราคาค่ารถเรียบร้อย", "fa-solid fa-floppy-disk");
+        }
+
+        function openSchoolRouteSettingsModal() {
+            document.getElementById('school-route-settings-modal').classList.remove('hidden');
+            document.getElementById('school-route-settings-modal').classList.add('flex');
+
+            const container = document.getElementById('school-route-order-list');
+            let html = "";
+            schoolRouteOrder.forEach((sc, idx) => {
+                html += `
+                    <div class="flex justify-between items-center p-2.5 bg-slate-50 rounded-xl border border-slate-200">
+                        <span class="font-bold text-xs text-slate-800">${idx + 1}. ${sc}</span>
+                        <span class="text-[10px] text-slate-400">ลำดับที่ ${idx + 1}</span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function closeSchoolRouteSettingsModal() {
+            document.getElementById('school-route-settings-modal').classList.add('hidden');
+            document.getElementById('school-route-settings-modal').classList.remove('flex');
+        }
+
+        function saveSchoolRouteOrder() {
+            closeSchoolRouteSettingsModal();
+            showToast("บันทึกลำดับเส้นทางแล้ว", "", "fa-solid fa-route");
+        }
+
+        function openWeeklyScheduleModal() {
+            document.getElementById('weekly-schedule-modal').classList.remove('hidden');
+            document.getElementById('weekly-schedule-modal').classList.add('flex');
+
+            const container = document.getElementById('weekly-days-list');
+            let html = "";
+            weeklySchedule.forEach((w, idx) => {
+                html += `
+                    <div class="p-2.5 bg-slate-50 rounded-2xl border border-slate-200 flex justify-between items-center">
+                        <span class="font-bold text-slate-800 text-xs">${w.day}</span>
+                        <div class="flex gap-2 text-[10px] font-bold">
+                            <label class="flex items-center gap-1 cursor-pointer"><input type="checkbox" ${w.morning ? 'checked' : ''} onchange="weeklySchedule[${idx}].morning=this.checked"> รับเช้า</label>
+                            <label class="flex items-center gap-1 cursor-pointer"><input type="checkbox" ${w.evening ? 'checked' : ''} onchange="weeklySchedule[${idx}].evening=this.checked"> ส่งเย็น</label>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function closeWeeklyScheduleModal() {
+            document.getElementById('weekly-schedule-modal').classList.add('hidden');
+            document.getElementById('weekly-schedule-modal').classList.remove('flex');
+        }
+
+        function saveWeeklySchedule() {
+            closeWeeklyScheduleModal();
+            showToast("บันทึกตารางประจำสัปดาห์แล้ว", "", "fa-solid fa-calendar-check");
+        }
+
+        function openParentRegisterModal() {
+            document.getElementById('parent-register-modal').classList.remove('hidden');
+            document.getElementById('parent-register-modal').classList.add('flex');
+        }
+
+        function closeParentRegisterModal() {
+            document.getElementById('parent-register-modal').classList.add('hidden');
+            document.getElementById('parent-register-modal').classList.remove('flex');
+        }
+
+        function submitParentRegister() {
+            const name = document.getElementById('reg-student-fullname').value;
+            const code = document.getElementById('reg-student-code').value;
+            if (!name || !code) { alert("กรุณากรอกข้อมูลให้ครบถ้วน"); return; }
+            closeParentRegisterModal();
+            showToast("ลงทะเบียนผูกรหัสลูกสำเร็จ", `เชื่อมต่อกับ ${name} เรียบร้อยแล้ว`, "fa-solid fa-id-card");
+        }
+
+        function openAddYoungChildModal() {
+            document.getElementById('add-young-child-modal').classList.remove('hidden');
+            document.getElementById('add-young-child-modal').classList.add('flex');
+        }
+
+        function closeAddYoungChildModal() {
+            document.getElementById('add-young-child-modal').classList.add('hidden');
+            document.getElementById('add-young-child-modal').classList.remove('flex');
+        }
+
+        function submitYoungChildRequest() {
+            const name = document.getElementById('young-child-name').value;
+            if (!name) return;
+            closeAddYoungChildModal();
+            showToast("บันทึกเด็กเล็กสำเร็จ", `ส่งข้อมูล ${name} ไปยังคนขับเรียบร้อย`, "fa-solid fa-child");
+        }
+
+        function openAllRegisteredModal(type) {
+            document.getElementById('all-registered-modal').classList.remove('hidden');
+            document.getElementById('all-registered-modal').classList.add('flex');
+
+            const container = document.getElementById('all-registered-modal-list');
+            let html = "";
+
+            if (type === 'students') {
+                document.getElementById('all-registered-modal-title').innerHTML = '<i class="fa-solid fa-list-check text-blue-600"></i> รายชื่อนักเรียนทั้งหมดในระบบ';
+                driverStudentsList.forEach(st => {
+                    html += `<div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200"><p class="font-bold text-slate-800 text-xs">${st.name} (${st.nickname})</p><p class="text-[10px] text-slate-500">โรงเรียน: ${st.school}</p></div>`;
+                });
+            } else {
+                document.getElementById('all-registered-modal-title').innerHTML = '<i class="fa-solid fa-address-book text-purple-600"></i> รายชื่อผู้ปกครองทั้งหมด';
+                driverStudentsList.forEach(st => {
+                    html += `<div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200"><p class="font-bold text-slate-800 text-xs">${st.parentName}</p><p class="text-[10px] text-slate-500">ผู้ปกครองของ: ${st.name}</p></div>`;
+                });
+            }
+            container.innerHTML = html;
+        }
+
+        function closeAllRegisteredModal() {
+            document.getElementById('all-registered-modal').classList.add('hidden');
+            document.getElementById('all-registered-modal').classList.remove('flex');
+        }
+
+        function openChatSelectionModal(targetRole) {
+            document.getElementById('chat-selection-modal').classList.remove('hidden');
+            document.getElementById('chat-selection-modal').classList.add('flex');
+
+            const container = document.getElementById('chat-selection-list');
+            let html = "";
+            driverStudentsList.forEach(st => {
+                const dispName = (targetRole === 'student') ? st.name : st.parentName;
+                html += `
+                    <button onclick="closeChatSelectionModal(); openChatScreen('${dispName}', '${targetRole}')" class="w-full p-2.5 bg-slate-50 hover:bg-indigo-50 rounded-xl border border-slate-200 text-left font-bold text-xs text-slate-800 flex justify-between items-center transition">
+                        <span>${dispName}</span>
+                        <i class="fa-solid fa-chevron-right text-slate-400 text-xs"></i>
                     </button>
                 `;
             });
-            if (simButtons) simButtons.innerHTML = simHtml;
+            container.innerHTML = html;
         }
 
-        function setParentTripStep(stepNum) {
-            if (parentTripMode === 'morning') {
-                parentMorningStep = stepNum;
-            } else {
-                parentEveningStep = stepNum;
-            }
-            renderParentTripSteps();
-            showToast("จำลองขั้นตอนเดินทาง", `เปลี่ยนสถานะเป็นขั้นตอนที่ ${stepNum} เรียบร้อยแล้ว`, "fa-solid fa-sliders", "bg-purple-500/20 text-purple-400");
+        function closeChatSelectionModal() {
+            document.getElementById('chat-selection-modal').classList.add('hidden');
+            document.getElementById('chat-selection-modal').classList.remove('flex');
         }
 
-        // SIMULATION BUTTONS (DAY ROLLOVER & NOON RESET)
-        function simulateNextDayRollover() {
-            driverStudentsList.forEach(s => {
-                s.boarded = false;
-                s.isMorningGo = true;
-                s.isEveningGo = true;
-            });
-            studentNoteState = 'none';
-            activeNoteText = "";
-            parentMorningStep = 1;
-            parentEveningStep = 1;
-
-            updateUIFromState();
-            showToast("ข้ามสู่วันถัดไป (Reset 00:00)", "รีเซ็ตสถานะการขึ้นรถและสถานะการลาทั้งหมดเข้าสู่วันใหม่เรียบร้อยแล้ว", "fa-solid fa-sun", "bg-amber-500/20 text-amber-400");
-        }
-
-        function simulateNoonReset() {
-            driverStudentsList.forEach(s => {
-                s.boarded = false;
-            });
-            showToast("รีเซ็ตช่วงเที่ยง (12:00)", "เตรียมพร้อมข้อมูลสำหรับการวิ่งรถแวะรับนักเรียนรอบเย็นกลับบ้าน", "fa-solid fa-clock", "bg-orange-500/20 text-orange-400");
-            updateUIFromState();
-        }
-
-        // CHAT SYSTEM LOGIC
-        function openChatScreen(targetName, subtext) {
-            document.getElementById('chat-target-name').innerText = targetName;
-            document.getElementById('chat-target-subtext').innerText = subtext;
+        function openChatScreen(name, roleLabel) {
+            document.getElementById('chat-target-name').innerText = name;
+            document.getElementById('chat-target-subtext').innerText = roleLabel;
             document.getElementById('screen-chat').classList.remove('hidden');
         }
 
@@ -2130,45 +2520,56 @@
         }
 
         function sendChatMessage() {
-            const input = document.getElementById('chat-input-field');
-            const text = input.value.trim();
-            if (!text) return;
+            const field = document.getElementById('chat-input-field');
+            const val = field.value.trim();
+            if (!val) return;
 
             const box = document.getElementById('chat-messages-box');
             const msgDiv = document.createElement('div');
-            msgDiv.className = "flex justify-end";
-            msgDiv.innerHTML = `
-                <div class="bg-indigo-600 text-white p-2.5 rounded-2xl rounded-tr-none max-w-[80%] text-xs shadow">
-                    <p>${text}</p>
-                    <span class="text-[8px] text-indigo-200 block text-right mt-1">ส่งแล้ว</span>
-                </div>
-            `;
+            msgDiv.className = "p-3 bg-indigo-600 text-white rounded-2xl max-w-[80%] ml-auto text-xs shadow-sm";
+            msgDiv.innerText = val;
             box.appendChild(msgDiv);
-            input.value = '';
+
+            field.value = "";
             box.scrollTop = box.scrollHeight;
         }
 
-        function simulateAttachFile() {
-            showToast("แนบไฟล์", "ระบบจำลองการเลือกรูปภาพหรือไฟล์เอกสารส่งในแชท", "fa-solid fa-paperclip", "bg-indigo-500/20 text-indigo-400");
+        function openGroupChatModal(role) {
+            document.getElementById('group-chat-modal').classList.remove('hidden');
+            document.getElementById('group-chat-modal').classList.add('flex');
         }
 
-        // DIRECT CALL SIMULATION
-        let callTimerInterval = null;
-        let callSeconds = 0;
+        function closeGroupChatModal() {
+            document.getElementById('group-chat-modal').classList.add('hidden');
+            document.getElementById('group-chat-modal').classList.remove('flex');
+        }
 
+        function sendGroupChatMessage() {
+            const input = document.getElementById('group-chat-input');
+            const val = input.value.trim();
+            if (!val) return;
+
+            const box = document.getElementById('group-chat-messages');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = "bg-indigo-50 p-2 rounded-xl border border-indigo-200 shadow-sm";
+            msgDiv.innerHTML = `<p class="font-bold text-indigo-900 text-[10px]">ฉัน:</p><p class="text-slate-800">${val}</p>`;
+            box.appendChild(msgDiv);
+
+            input.value = "";
+            box.scrollTop = box.scrollHeight;
+        }
+
+        // Call Simulation
+        let callTimerInterval = null;
         function makeDirectCall() {
-            const targetName = document.getElementById('chat-target-name').innerText;
-            document.getElementById('call-screen-name').innerText = targetName;
             document.getElementById('call-modal').classList.remove('hidden');
             document.getElementById('call-modal').classList.add('flex');
-
-            callSeconds = 0;
-            document.getElementById('call-timer').innerText = "00:00";
+            let sec = 0;
             callTimerInterval = setInterval(() => {
-                callSeconds++;
-                const mins = String(Math.floor(callSeconds / 60)).padStart(2, '0');
-                const secs = String(callSeconds % 60).padStart(2, '0');
-                document.getElementById('call-timer').innerText = `${mins}:${secs}`;
+                sec++;
+                let m = Math.floor(sec / 60).toString().padStart(2, '0');
+                let s = (sec % 60).toString().padStart(2, '0');
+                document.getElementById('call-timer').innerText = `${m}:${s}`;
             }, 1000);
         }
 
@@ -2176,579 +2577,26 @@
             if (callTimerInterval) clearInterval(callTimerInterval);
             document.getElementById('call-modal').classList.add('hidden');
             document.getElementById('call-modal').classList.remove('flex');
-            showToast("วางสายแล้ว", "การโทรติดต่อผ่านเครือข่ายสิ้นสุดลง", "fa-solid fa-phone-slash", "bg-rose-500/20 text-rose-400");
+            document.getElementById('call-timer').innerText = "00:00";
         }
 
-        // MODALS SHOW/HIDE HELPERS
-        function openAllRegisteredModal(type) {
-            const modal = document.getElementById('all-registered-modal');
-            const title = document.getElementById('all-registered-modal-title');
-            const list = document.getElementById('all-registered-modal-list');
-
-            if (type === 'students') {
-                title.innerHTML = `<i class="fa-solid fa-user-graduate text-indigo-600"></i> รายชื่อนักเรียนที่ลงทะเบียนทั้งหมด (${driverStudentsList.length})`;
-                let html = '';
-                driverStudentsList.forEach(s => {
-                    html += `
-                        <div class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl space-y-0.5">
-                            <p class="font-bold text-slate-900">${s.name} (${s.nickname})</p>
-                            <p class="text-[10px] text-slate-500">รหัสประจำตัว: ${s.code} • ${s.school}</p>
-                            <p class="text-[10px] text-indigo-600 font-semibold">ผู้ปกครอง: ${s.parentName}</p>
-                        </div>
-                    `;
-                });
-                list.innerHTML = html;
-            } else {
-                title.innerHTML = `<i class="fa-solid fa-user-group text-purple-600"></i> รายชื่อผู้ปกครองที่ลงทะเบียนทั้งหมด`;
-                let html = '';
-                driverStudentsList.forEach(s => {
-                    html += `
-                        <div class="p-2.5 bg-purple-50 border border-purple-200 rounded-xl space-y-0.5">
-                            <p class="font-bold text-purple-950">${s.parentName}</p>
-                            <p class="text-[10px] text-purple-700">ผู้ปกครองของ: ${s.name} (${s.nickname})</p>
-                        </div>
-                    `;
-                });
-                list.innerHTML = html;
-            }
-
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+        function sendPaymentNoticeToParent(parent, student) {
+            showToast("ส่งแจ้งเตือนบิลแล้ว", `ส่งแจ้งเตือนค่าบริการไปยัง ${parent} (${student}) เรียบร้อย`, "fa-solid fa-paper-plane");
         }
 
-        function closeAllRegisteredModal() {
-            const modal = document.getElementById('all-registered-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function openParentRegisterModal() {
-            const modal = document.getElementById('parent-register-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeParentRegisterModal() {
-            const modal = document.getElementById('parent-register-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function submitParentRegister() {
-            const name = document.getElementById('reg-student-fullname').value;
-            const code = document.getElementById('reg-student-code').value;
-
-            if (name && code) {
-                closeParentRegisterModal();
-                showToast("ผูกรหัสลูกสำเร็จ!", `เชื่อมต่อบัญชีกับ ${name} (รหัส ${code}) เรียบร้อยแล้ว`, "fa-solid fa-link", "bg-purple-500/20 text-purple-400");
-            }
-        }
-
-        function openAddYoungChildModal() {
-            const modal = document.getElementById('add-young-child-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeAddYoungChildModal() {
-            const modal = document.getElementById('add-young-child-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function submitYoungChildRequest() {
-            const name = document.getElementById('young-child-name').value;
-            if (name) {
-                const newChild = {
-                    id: driverStudentsList.length + 1,
-                    name: name, nickname: name.split(' ')[1] || "เด็กเล็ก", code: "999000",
-                    school: "ชั้นเด็กเล็ก/อนุบาล", address: "ที่อยู่ตามผู้ปกครอง", fare: 2000,
-                    payStatus: "UNPAID", isMorningGo: true, isEveningGo: true, boarded: false,
-                    statusNote: "เด็กเล็กเพิ่มใหม่", lat: 13.7580, lng: 100.5100, schoolLat: 13.7680, schoolLng: 100.5450,
-                    parentName: "คุณแม่นิด (086-777-8888)"
-                };
-                driverStudentsList.push(newChild);
-                closeAddYoungChildModal();
-                renderParentChildButtons();
-                updateUIFromState();
-                showToast("เพิ่มเด็กเล็กเรียบร้อย", `ส่งข้อมูล ${name} เข้าระบบรถตู้เรียบร้อยแล้ว`, "fa-solid fa-child-reaching", "bg-purple-500/20 text-purple-400");
-            }
-        }
-
-        function openJoinVanModal(role) {
-            const modal = document.getElementById('join-van-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeJoinVanModal() {
-            const modal = document.getElementById('join-van-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function submitJoinVanRequest() {
-            const code = document.getElementById('input-join-van-code').value.trim();
-            if (code) {
-                isStudentRegistered = true;
-                closeJoinVanModal();
-                renderStudentSelfUI();
-                showToast("เข้าร่วมรถตู้สำเร็จ!", `คุณได้เข้าร่วมรถตู้รหัส ${code} เรียบร้อยแล้ว`, "fa-solid fa-circle-check", "bg-emerald-500/20 text-emerald-400");
-            }
-        }
-
-        function openGroupChatModal(role) {
-            const modal = document.getElementById('group-chat-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeGroupChatModal() {
-            const modal = document.getElementById('group-chat-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function sendGroupChatMessage() {
-            const input = document.getElementById('group-chat-input');
-            const text = input.value.trim();
-            if (!text) return;
-
-            const box = document.getElementById('group-chat-messages');
-            const div = document.createElement('div');
-            div.className = "bg-indigo-50 p-2 rounded-xl border border-indigo-100 shadow-sm text-right";
-            div.innerHTML = `<p class="font-bold text-indigo-900 text-[10px]">คุณ:</p><p class="text-slate-800">${text}</p>`;
-            box.appendChild(div);
-            input.value = '';
-            box.scrollTop = box.scrollHeight;
-        }
-
-        function openCashPaymentModal() {
-            const modal = document.getElementById('cash-payment-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeCashPaymentModal() {
-            const modal = document.getElementById('cash-payment-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function confirmCashPayment() {
-            closeCashPaymentModal();
-            const student = driverStudentsList.find(s => s.id === selectedParentChildId);
-            if (student) student.payStatus = 'PAID_CASH';
-
-            const banner = document.getElementById('parent-payment-success-banner');
-            const buttonsGrid = document.getElementById('parent-payment-buttons-grid');
-            const statusBadge = document.getElementById('parent-bill-status-badge');
-
-            if (banner) { banner.classList.remove('hidden'); banner.innerText = "✓ แจ้งชำระด้วยเงินสดเรียบร้อยแล้ว (รอคนขับยืนยันยอด)"; }
-            if (buttonsGrid) buttonsGrid.classList.add('hidden');
-            if (statusBadge) { statusBadge.innerText = "💵 แจ้งจ่ายเงินสดแล้ว"; statusBadge.className = "text-[10px] bg-emerald-100 text-emerald-900 font-bold px-2.5 py-1 rounded-full border border-emerald-300"; }
-
-            showToast("แจ้งจ่ายเงินสดแล้ว", "ข้อมูลแจ้งคนขับเพื่อเตรียมรับเงินสดเมื่อเจอนักเรียนเรียบร้อยแล้ว", "fa-solid fa-money-bill-wave", "bg-emerald-500/20 text-emerald-400");
-        }
-
-        function openQRPaymentModal() {
-            const modal = document.getElementById('qr-payment-modal');
-            const qrcodeBox = document.getElementById('promptpay-qrcode-container');
-            qrcodeBox.innerHTML = '';
-
-            const student = driverStudentsList.find(s => s.id === selectedParentChildId);
-            const amount = student ? student.fare : 2500;
-
-            document.getElementById('qr-modal-amount-tag').innerText = `ยอดชำระ: ฿${amount.toLocaleString()}`;
-
-            new QRCode(qrcodeBox, {
-                text: `00020101021129370016A000000677010111011300${driverPromptPayNumber}5802TH53037645404${amount}.0063041234`,
-                width: 140, height: 140
-            });
-
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeQRPaymentModal() {
-            const modal = document.getElementById('qr-payment-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function confirmTransferPayment() {
-            closeQRPaymentModal();
-            const student = driverStudentsList.find(s => s.id === selectedParentChildId);
-            if (student) student.payStatus = 'PAID_TRANSFER';
-
-            const banner = document.getElementById('parent-payment-success-banner');
-            const buttonsGrid = document.getElementById('parent-payment-buttons-grid');
-            const statusBadge = document.getElementById('parent-bill-status-badge');
-
-            if (banner) { banner.classList.remove('hidden'); banner.innerText = "✓ โอนเงินผ่านพร้อมเพย์สำเร็จแล้ว"; }
-            if (buttonsGrid) buttonsGrid.classList.add('hidden');
-            if (statusBadge) { statusBadge.innerText = "✅ ชำระเงินแล้ว"; statusBadge.className = "text-[10px] bg-emerald-100 text-emerald-900 font-bold px-2.5 py-1 rounded-full border border-emerald-300"; }
-
-            showToast("ชำระเงินสำเร็จ!", "บันทึกยอดโอนเงินผ่านระบบพร้อมเพย์เรียบร้อยแล้ว", "fa-solid fa-circle-check", "bg-emerald-500/20 text-emerald-400");
-        }
-
-        function openWeeklyScheduleModal() {
-            const modal = document.getElementById('weekly-schedule-modal');
-            const list = document.getElementById('weekly-days-list');
-
-            let html = '';
-            weeklySchedule.forEach((item, idx) => {
-                html += `
-                    <div class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl flex justify-between items-center">
-                        <span class="font-bold text-slate-800">${item.day}</span>
-                        <div class="flex gap-2 text-[10px]">
-                            <label class="flex items-center gap-1 font-semibold text-emerald-800 cursor-pointer">
-                                <input type="checkbox" ${item.morning ? 'checked' : ''} onchange="weeklySchedule[${idx}].morning = this.checked"> เช้า
-                            </label>
-                            <label class="flex items-center gap-1 font-semibold text-blue-800 cursor-pointer">
-                                <input type="checkbox" ${item.evening ? 'checked' : ''} onchange="weeklySchedule[${idx}].evening = this.checked"> เย็น
-                            </label>
-                        </div>
-                    </div>
-                `;
-            });
-            list.innerHTML = html;
-
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeWeeklyScheduleModal() {
-            const modal = document.getElementById('weekly-schedule-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function saveWeeklySchedule() {
-            closeWeeklyScheduleModal();
-            showToast("บันทึกตารางแล้ว", "การตั้งค่าตารางรับส่งประจำสัปดาห์จะนำไปปรับใช้อัตโนมัติ", "fa-solid fa-calendar-check", "bg-purple-500/20 text-purple-400");
-        }
-
-        function openChatSelectionModal(type) {
-            const modal = document.getElementById('chat-selection-modal');
-            const title = document.getElementById('chat-select-title');
-            const list = document.getElementById('chat-selection-list');
-
-            if (type === 'student') {
-                title.innerHTML = `<i class="fa-solid fa-user-graduate text-indigo-600"></i> เลือกนักเรียนเพื่อเริ่มแชต`;
-                let html = '';
-                driverStudentsList.forEach(s => {
-                    html += `
-                        <button onclick="closeChatSelectionModal(); openChatScreen('${s.name} (${s.nickname})', 'นักเรียน')" class="w-full p-2.5 bg-slate-50 hover:bg-indigo-50 border border-slate-200 rounded-xl text-left font-bold text-slate-800 transition flex justify-between items-center">
-                            <span>💬 ${s.name}</span>
-                            <span class="text-[10px] text-slate-400">${s.school}</span>
-                        </button>
-                    `;
-                });
-                list.innerHTML = html;
-            } else {
-                title.innerHTML = `<i class="fa-solid fa-user-group text-purple-600"></i> เลือกผู้ปกครองเพื่อเริ่มแชต`;
-                let html = '';
-                driverStudentsList.forEach(s => {
-                    html += `
-                        <button onclick="closeChatSelectionModal(); openChatScreen('${s.parentName}', 'ผู้ปกครอง')" class="w-full p-2.5 bg-slate-50 hover:bg-purple-50 border border-slate-200 rounded-xl text-left font-bold text-slate-800 transition flex justify-between items-center">
-                            <span>💬 ${s.parentName}</span>
-                            <span class="text-[10px] text-slate-400">ผู้ปกครอง ${s.nickname}</span>
-                        </button>
-                    `;
-                });
-                list.innerHTML = html;
-            }
-
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeChatSelectionModal() {
-            const modal = document.getElementById('chat-selection-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function openVanQRModal() {
-            const modal = document.getElementById('van-qr-modal');
-            const qrBox = document.getElementById('van-actual-qrcode-box');
-            qrBox.innerHTML = '';
-
-            new QRCode(qrBox, {
-                text: "VAN_PRO_CODE_V-98765",
-                width: 130, height: 130
-            });
-
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeVanQRModal() {
-            const modal = document.getElementById('van-qr-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function simulateStudentScanRequest() {
-            closeVanQRModal();
-            const modal = document.getElementById('driver-accept-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeAcceptModal() {
-            const modal = document.getElementById('driver-accept-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function confirmAcceptStudent() {
-            closeAcceptModal();
-            showToast("อนุมัตินักเรียนใหม่แล้ว", "เพิ่ม ด.ช. นพดล เรียนดี เข้าสู่รายชื่อนักเรียนประจำรถตู้คันนี้แล้ว", "fa-solid fa-user-plus", "bg-emerald-500/20 text-emerald-400");
-        }
-
-        function openProfileEditModal(role) {
-            activeEditRole = role;
-            const modal = document.getElementById('profile-edit-modal');
-            const quotaBadge = document.getElementById('quota-display-badge');
-            const fieldsContainer = document.getElementById('profile-form-fields');
-            const data = profileData[role];
-
-            quotaBadge.innerText = `${editQuota[role]} / 3 ครั้ง`;
-
-            let html = `
-                <div>
-                    <label class="font-bold text-slate-700 block mb-1">ชื่อ-นามสกุล:</label>
-                    <input type="text" id="edit-prof-name" value="${data.name}" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold">
-                </div>
-                <div>
-                    <label class="font-bold text-slate-700 block mb-1">เบอร์โทรศัพท์ติดต่อ:</label>
-                    <input type="text" id="edit-prof-phone" value="${data.phone}" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold">
-                </div>
-            `;
-
-            if (role === 'driver') {
-                html += `
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-1">ป้ายทะเบียนรถตู้:</label>
-                        <input type="text" id="edit-prof-license" value="${data.license}" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold">
-                    </div>
-                `;
-            } else if (role === 'student') {
-                html += `
-                    <div>
-                        <label class="font-bold text-slate-700 block mb-1">โรงเรียน:</label>
-                        <input type="text" id="edit-prof-school" value="${data.school}" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl font-bold">
-                    </div>
-                `;
-            }
-
-            fieldsContainer.innerHTML = html;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeProfileEditModal() {
-            const modal = document.getElementById('profile-edit-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function saveProfileChanges() {
-            if (editQuota[activeEditRole] <= 0) {
-                showToast("สิทธิ์แก้ไขหมดแล้ว", "คุณใช้สิทธิ์แก้ไขข้อมูลครบ 3 ครั้งแล้วสำหรับเดือนนี้", "fa-solid fa-lock", "bg-rose-500/20 text-rose-400");
-                return;
-            }
-
-            const name = document.getElementById('edit-prof-name').value;
-            const phone = document.getElementById('edit-prof-phone').value;
-
-            profileData[activeEditRole].name = name;
-            profileData[activeEditRole].phone = phone;
-
-            if (activeEditRole === 'driver') {
-                document.getElementById('driver-disp-name').innerText = name;
-                profileData.driver.license = document.getElementById('edit-prof-license').value;
-            } else if (activeEditRole === 'student') {
-                document.getElementById('student-disp-name').innerText = name;
-                profileData.student.school = document.getElementById('edit-prof-school').value;
-                document.getElementById('student-disp-school-name').innerText = profileData.student.school;
-            } else if (activeEditRole === 'parent') {
-                document.getElementById('parent-disp-name').innerText = name;
-            }
-
-            editQuota[activeEditRole]--;
-            closeProfileEditModal();
-            showToast("บันทึกข้อมูลเรียบร้อย", "อัปเดตข้อมูลส่วนตัวเข้าสู่ระบบเรียบร้อยแล้ว", "fa-solid fa-user-check", "bg-emerald-500/20 text-emerald-400");
-        }
-
-        function previewProfileImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const imgUrl = e.target.result;
-                    document.getElementById('modal-avatar-text').classList.add('hidden');
-                    const img = document.getElementById('modal-avatar-img');
-                    img.src = imgUrl;
-                    img.classList.remove('hidden');
-
-                    if (activeEditRole === 'driver') {
-                        document.getElementById('avatar-text-driver').classList.add('hidden');
-                        const driverImg = document.getElementById('avatar-img-driver');
-                        driverImg.src = imgUrl;
-                        driverImg.classList.remove('hidden');
-                    } else if (activeEditRole === 'student') {
-                        document.getElementById('avatar-text-student').classList.add('hidden');
-                        const studentImg = document.getElementById('avatar-img-student');
-                        studentImg.src = imgUrl;
-                        studentImg.classList.remove('hidden');
-                    } else if (activeEditRole === 'parent') {
-                        document.getElementById('avatar-text-parent').classList.add('hidden');
-                        const parentImg = document.getElementById('avatar-img-parent');
-                        parentImg.src = imgUrl;
-                        parentImg.classList.remove('hidden');
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function openFareSettingsModal() {
-            const modal = document.getElementById('fare-settings-modal');
-            const container = document.getElementById('fare-student-settings-container');
-
-            document.getElementById('input-driver-account-name').value = driverAccountName;
-            document.getElementById('input-driver-promptpay').value = driverPromptPayNumber;
-
-            let html = '';
+        function simulateNextDayRollover() {
             driverStudentsList.forEach(s => {
-                html += `
-                    <div class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl flex justify-between items-center">
-                        <span class="font-bold text-slate-800">${s.name} (${s.nickname})</span>
-                        <div class="flex items-center gap-1">
-                            <span class="text-xs font-bold text-slate-500">฿</span>
-                            <input type="number" id="fare-rate-input-${s.id}" value="${s.fare}" class="w-20 p-1.5 border border-slate-300 rounded-lg font-bold text-right text-xs">
-                        </div>
-                    </div>
-                `;
+                s.boarded = false;
+                s.isMorningGo = true;
+                s.isEveningGo = true;
             });
-            container.innerHTML = html;
-
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+            renderDriverStudentList();
+            showToast("รีเซ็ตขึ้นวันใหม่ (00:00)", "รีเซ็ตสถานะการเดินทางของนักเรียนเป็นวันใหม่เรียบร้อย", "fa-solid fa-arrows-rotate");
         }
 
-        function closeFareSettingsModal() {
-            const modal = document.getElementById('fare-settings-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+        function simulateNoonReset() {
+            showToast("รีเซ็ตรอบเที่ยง (12:00)", "เตรียมพร้อมสำหรับการเดินทางส่งรอบเย็น", "fa-solid fa-clock");
         }
-
-        function saveCustomFareRates() {
-            driverAccountName = document.getElementById('input-driver-account-name').value;
-            driverPromptPayNumber = document.getElementById('input-driver-promptpay').value;
-
-            driverStudentsList.forEach(s => {
-                const input = document.getElementById(`fare-rate-input-${s.id}`);
-                if (input) {
-                    s.fare = Number(input.value);
-                }
-            });
-
-            closeFareSettingsModal();
-            renderDriverPaymentList();
-            showToast("บันทึกการตั้งค่าแล้ว", "บันทึกราคาค่ารถรายบุคคลและบัญชีรับเงินเรียบร้อยแล้ว", "fa-solid fa-sliders", "bg-purple-500/20 text-purple-400");
-        }
-
-        function openSchoolRouteSettingsModal() {
-            const modal = document.getElementById('school-route-settings-modal');
-            const list = document.getElementById('school-route-order-list');
-
-            let html = '';
-            schoolRouteOrder.forEach((schoolName, idx) => {
-                html += `
-                    <div class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl flex justify-between items-center">
-                        <span class="font-bold text-slate-800">${idx + 1}. ${schoolName}</span>
-                        <div class="flex gap-1">
-                            ${idx > 0 ? `<button onclick="moveSchoolRoute(${idx}, -1)" class="w-6 h-6 bg-emerald-600 text-white rounded font-bold">↑</button>` : ''}
-                            ${idx < schoolRouteOrder.length - 1 ? `<button onclick="moveSchoolRoute(${idx}, 1)" class="w-6 h-6 bg-emerald-600 text-white rounded font-bold">↓</button>` : ''}
-                        </div>
-                    </div>
-                `;
-            });
-            list.innerHTML = html;
-
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function moveSchoolRoute(index, direction) {
-            const targetIndex = index + direction;
-            const temp = schoolRouteOrder[index];
-            schoolRouteOrder[index] = schoolRouteOrder[targetIndex];
-            schoolRouteOrder[targetIndex] = temp;
-            openSchoolRouteSettingsModal();
-        }
-
-        function closeSchoolRouteSettingsModal() {
-            const modal = document.getElementById('school-route-settings-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function saveSchoolRouteOrder() {
-            closeSchoolRouteSettingsModal();
-            renderSchoolList();
-            showToast("บันทึกลำดับเส้นทาง", "ปรับเปลี่ยนลำดับการแวะส่งโรงเรียนเรียบร้อยแล้ว", "fa-solid fa-route", "bg-emerald-500/20 text-emerald-400");
-        }
-
-        function openCustomLocationNoteModal() {
-            const modal = document.getElementById('custom-location-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeCustomLocationModal() {
-            const modal = document.getElementById('custom-location-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function saveDraftCustomNote() {
-            const input = document.getElementById('input-custom-location');
-            const text = input.value.trim();
-            if (text) {
-                studentNoteState = 'draft';
-                activeNoteText = text;
-                updateStudentNoticeBoxUI();
-                input.value = '';
-                closeCustomLocationModal();
-                showToast("ร่างหมายเหตุสำเร็จ", "บันทึกร่างหมายเหตุพิเศษเรียบร้อยแล้ว", "fa-solid fa-pen-to-square", "bg-amber-500/20 text-amber-400");
-            }
-        }
-
-        function viewVanPhotoModal() {
-            const modal = document.getElementById('view-van-photo-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeViewVanPhotoModal() {
-            const modal = document.getElementById('view-van-photo-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function sendPaymentNoticeToParent(parentName, studentName) {
-            showToast("ส่งแจ้งเตือนบิลสำเร็จ", `ส่งแจ้งเตือนบิลค่ารถไปยัง ${parentName} (${studentName}) เรียบร้อยแล้ว`, "fa-solid fa-paper-plane", "bg-amber-500/20 text-amber-400");
-        }
-
-        // Initialize Application
-        window.addEventListener('load', () => {
-            selectAuthRole('driver');
-        });
     </script>
 </body>
 </html>
